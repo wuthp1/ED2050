@@ -25,19 +25,11 @@ def init():
     pygame.init()
     # Set size of pygame window.
     screen=pygame.display.set_mode((0, 0), pygame.FULLSCREEN)
-    # Create empty pygame surface.
-    background = pygame.Surface(screen.get_size())
-    # Fill the background white color.
-    background.fill(WHITE)
-    # Convert Surface object to make blitting faster.
-    background = background.convert()
-    # Copy background to screen (position (0, 0) is upper left corner).
-    screen.blit(background, (0,0))
     return screen
 
 
-def write(msg):
-    myfont = pygame.font.SysFont("None", 30)
+def write(msg, font = "Courier New"):
+    myfont = pygame.font.SysFont(font, 40)
     mytext = myfont.render(msg, True, (0,0,0))
     mytext = mytext.convert_alpha()
     return mytext
@@ -100,5 +92,4 @@ def op_arc(surf, screen_width, center):
     #calculte zero point of the rectangle with the arc in it (upper left point)
     arc_zero = (int(center[0]-(arc_size/2)),int(center[1]-(arc_size/2)))
     pygame.draw.arc(surf,BLACK,pygame.Rect(arc_zero,(int(arc_size),int(arc_size))),-pi/2,pi*3/2)
-    #pygame.draw.arc(surf,BLACK,pygame.Rect(arc_zero,(int(arc_size),int(arc_size))),(-0.2783),pi+0.2783)
     return

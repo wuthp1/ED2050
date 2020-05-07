@@ -1,3 +1,8 @@
+"""Provides API to communicate with powermeter PM3250.
+
+This package is used to set up the connection to Schneider Electric
+PM3250 and to read the most important register values
+"""
 import minimalmodbus
 
 #Depending on MODBUS Master Device, there can be an address offset.
@@ -30,13 +35,21 @@ regs = {
     'S2'      : 3072,
     'S3'      : 3074,
     'Stot'    : 3076,
+    'cosphi1' : 3078,
+    'cosphi2' : 3080,
+    'cosphi3' : 3082,
+    'cosphi'  : 3084,
     'freq'    : 3110,
     }
 
-def init():
+def init(port='/dev/serial0', addr=1, baudrate=38400):
+    """opens connection to powermeter.
+    
+    
+    """
     global pm
-    pm = minimalmodbus.Instrument('/dev/serial0',1)
-    pm.serial.baudrate=38400
+    pm = minimalmodbus.Instrument(port,addr)
+    pm.serial.baudrate=baudrate
 
 def readReg(regName):
     return pm.read_float(regs[regName]+OFFSET)

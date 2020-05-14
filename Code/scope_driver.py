@@ -1,6 +1,7 @@
 """provides API for USB communication with scope.
  TODO try catch security shit
 
+TODO return statements
 """
 
 
@@ -26,6 +27,9 @@ def getID():
     Returns:
         str: identification string received from scope"""
     return scope.query('*IDN?')
+
+
+#channel settings
 
 def getChannelInfo(chNr):
     """Reads scope channel info.
@@ -144,8 +148,11 @@ def setChannelVertScale(chNr, scale):
     Returns:
         (bool): True
     """
-    scope.write('CH%d:SCA' %chNr + scale)
+    scope.write('CH%d:SCA ' %chNr + scale)
     return True
+
+
+#horizontal settings
 
 def getHorScale():
     """Reads scope time base horizontal scale.
@@ -167,23 +174,8 @@ def setHorScale(scale):
     """
     return scope.write('HOR:SCA ' + scale)
 
-def lockFrontPanel():
-    """Locks all buttons and knobs on the front panel of the scope.
-    
-    Returns:
-        (bool): True
-    """
-    scope.write('LOC ALL')
-    return True
 
-def unlockFrontPanel():
-    """Unlocks all buttons and knobs on the front panel of the scope.
-    
-    Returns:
-        (bool): True
-    """
-    scope.write('UNL ALL')
-    return True
+#measurement
 
 def setMeasSrc1(src, slot):
     """Sets measurement source 1.
@@ -218,7 +210,7 @@ def setMeasSrc2(src, slot):
     scope.write('MEASU:MEAS%d:SOURCE2 ' %slot + src)
     return True
 
-def setMeasType(MeasType, slot):
+def setMeasType(measType, slot):
     """Sets what should be measured.
     
     Args:
@@ -236,7 +228,7 @@ def setMeasType(MeasType, slot):
         (bool): True
             
     """
-    scope.write('MEASU:MEAS%d:TYP ' %slot + MeasType)
+    scope.write('MEASU:MEAS%d:TYP ' %slot + measType)
     return True
 
 def setMeasState(state, slot):
@@ -265,11 +257,94 @@ def getMeasVal(slot):
     Args:
         slot (int): Measurement slot, may be an integer in 1 to 4
     
-    Returns
+    Returns:
         (str): Measured value
     """
     return scope.query('MEASU:MEAS%d:VAL?' %slot)
+
+def setImmMeasSrc1(src):
+    """Sets immediate measurement source 1.
     
+    Sets measurement source for all single source measuremets and
+    specifies the source to measure "from" for phase and delay
+    measurements. The immediate measurement is only available
+    on remote control and cannot be displayed on the scope.
+    
+    Args:
+        src (str): Measurement source
+            May be 'CHx', 'REFx' where x is the (reference) channel
+            number or 'MATH1' for math waveform.
+    
+    Returns:
+        (bool): True
+    """
+    scope.write('MEASU:IMM:SOU1 ' + src)
+    return True
+
+
+def setImmMeasSrc2(src):
+    """Sets immediate measurement source 2.
+    
+    Specifies the source to measure "to" for phase and delay
+    measurements. The immediate measurement is only available
+    on remote control and cannot be displayed on the scope.
+    
+    Args:
+        src (str): Measurement source
+            May be 'CHx', 'REFx' where x is the (reference) channel
+            number or 'MATH1' for math waveform.
+    
+    Returns:
+        (bool): True
+    """
+    scope.write('MEASU:IMM:SOU2 ' + src)
+    return True
+
+def setImmMeasType(measType):
+    """Sets what should be measured.
+    
+    Args:
+        MeasType (str): Specifies what should be measured
+        Only the most important types are listed here. For more
+        possibilities see Textronix DPO 2000 Programmer Manual
+            'AMP':  Amplitude
+            'FREQ': Frequency
+            'PHA': Phase in degrees
+            'RMS': RMS Voltage
+    Returns:
+        (bool): True
+    """
+    scope.write('MEASU:IMM:TYP ' + measType)
+    return True
+
+def getImmMeasVal():
+    """Reads measured immediate value.
+        
+    Returns:
+        (str): Measured value
+    """
+    return scope.query('MEASU:IMM:VAL?')
+
+#miscellaneous
+
+def lockFrontPanel():
+    """Locks all buttons and knobs on the front panel of the scope.
+    
+    Returns:
+        (bool): True
+    """
+    scope.write('LOC ALL')
+    return True
+
+def unlockFrontPanel():
+    """Unlocks all buttons and knobs on the front panel of the scope.
+    
+    Returns:
+        (bool): True
+    """
+    scope.write('UNL ALL')
+    return True
+
 def selectChannel(chNr,state):
     """Turns display of specified channel on or off
     
@@ -287,7 +362,7 @@ def selectChannel(chNr,state):
     return True
 
 def setEdgeTrigger(source, coupl='HFR', slope='RIS'):
-    """sets up edge trigger.
+    """Sets up edge trigger.
     
     Args:
         source (str): May be 'CH<x>', D'<y>','EXT','LINE' or 'AUX'
@@ -311,9 +386,47 @@ def setEdgeTrigger(source, coupl='HFR', slope='RIS'):
     scope.write('TRIG:A:EDGE:SOU ' + source) 
     return True
 
+def setProbeGain(chNr, gain):
+    """Sets ups probe gain.
+    
+    Gain is the inverse of the probe attenuation, so for a probe with
+    10x attenuation the gain must be set to '0.1' which is equivalent 
+    to '100E-3' or '1E-1'  
+    
+    Args:
+        chNr (int): channel number, may be a integer from 1 to 4
+        
+        gain (str): probe gain (inverse of probe attenuation factor)
+    
+    Returns:
+        (bool): True
+    """
+    scope.write('CH%d:PRO:GAIN ' %chNr + gain)
+    return True
 
-
-
+def turnOnChDisp(chNr):
+    """Turns display of selected channel on.
+    
+    Args:
+        chNr (int): channel number, may be a integer from 1 to 4
+    
+    Returns:
+        (bool): True
+    """
+    scope.write('SEL:CH%d ON' %chNr)
+    return True
+    
+def turnOffChDisp(chNr):
+    """Turns display of selected channel off.
+    
+    Args:
+        chNr (int): channel number, may be a integer from 1 to 4
+    
+    Returns:
+        (bool): True
+    """
+    scope.write('SEL:CH%d OFF' %chNr)
+    return True
 
 
 

@@ -60,26 +60,25 @@ pol_Gen = True
 pol_Net = True
 V_Gen = 0
 V_Net = 0
+f_Gen = 50
+adc.startContinuousConversion(adc_channel_0, 6144, sps)
+
 t0_Gen = time.time()
 t0_Net = time.time()
-f_Gen = 50
-adc.startContinuousConversion(adc_channel_0, gain, sps)
-        
+
 try:
     while True:
-        #read values, gliding average to cancel noise)
-        V_Gen = (0.8*V_Gen) + 0.2*((adc.getLastConversionResults()))
-        
-        #Zero crossing
+        V_Gen=((adc.getLastConversionResults())-3287)*(0.223)
         if ((pol_Gen == True) and (V_Gen < 0)) or ((pol_Gen == False) and (V_Gen > 0)):
             t1_Gen = time.time()
-            if pol_Gen:
+            f_Gen = 0.8*f_Gen + 0.2/(2*(t1_Gen-t0_Gen))
+            t0_Gen = t1_Gen
+            print(f_Gen)
+            if(pol_Gen):
                 pol_Gen = False
             else:
                 pol_Gen = True
-                f_Gen = 0.9*f_Gen + 0.1/((t1_Gen-t0_Gen))
-                t0_Gen = t1_Gen
-                print(f_Gen)
-    
+            
+
 except KeyboardInterrupt:
     GPIO.cleanup()

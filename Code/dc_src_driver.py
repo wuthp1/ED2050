@@ -1,18 +1,38 @@
+"""provides API for USB communication with DC source.
+
+This module contains the necessary functions to remotely set Voltage and
+Current of the DC source BK Precision 1687B via USB.
+
+TODO try catch security shit
+
+TODO return statements
+"""
 #package imports
 import serial
 
 #defines
 
 def init():
+    """Opens USB Port to communicate with DC src."""
     global ser
     PORT = '/dev/ttyUSB0'    
     ser = serial.Serial(PORT)
 
 def deInit():
+    """Closes USB Port to communicate with DC src."""
     global ser
     ser.close()
 
 def setVoltage(volts):
+    """Sets Output Voltage.
+    
+    Args:
+        volts (double): Output Voltage in Volts
+    
+    Returns:
+        (int): 0
+    """
+    
     global ser
     if 1 > volts > 36:
         #TODO ERROR
@@ -29,6 +49,14 @@ def setVoltage(volts):
         return 0
 
 def setCurrent(amps):
+    """Sets Output Voltage.
+    
+    Args:
+        volts (double): Output Voltage in Volts
+    
+    Returns:
+        (int): 0
+    """
     global ser
     if amps > 10:
         #TODO ERROR
@@ -45,9 +73,11 @@ def setCurrent(amps):
         return 0
 
 def OutputOn():
+    """Switch output on."""
     global ser
     ser.write('SOUT0\r')
 
 def OutputOff():
+    """Switch output off."""
     global ser
     ser.write('SOUT1\r')

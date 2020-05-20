@@ -1,3 +1,6 @@
+"""Provides functions to visualize state of the power plant model.
+
+"""
 import pygame
 from math import pi, sin, cos, tan, atan2, pow, sqrt
 
@@ -10,10 +13,13 @@ RED =   (255,   0,   0)
 
 #define maximal Load Angle in radians
 MAX_LOAD_ANGLE = 70*pi/180
+"""Maximimum allowable load angle.
 
+Defines, at what angle the maximum load angle constraint line will be drawn in the opaerating chart."""
 
 #globals
 global screen
+"""screen object"""
 
 #define serial reactance p.u.
 XD = 2

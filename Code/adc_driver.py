@@ -63,22 +63,26 @@ V_Net = 0
 f_Gen = 50
 adc.startContinuousConversion(adc_channel_0, 6144, sps)
 
-t0_Gen = time.time()
-t0_Net = time.time()
+# ~ t0_Gen = time.time()
+# ~ t0_Net = time.time()
 
-try:
-    while True:
-        V_Gen=((adc.getLastConversionResults())-3287)*(0.223)
-        if ((pol_Gen == True) and (V_Gen < 0)) or ((pol_Gen == False) and (V_Gen > 0)):
-            t1_Gen = time.time()
-            f_Gen = 0.8*f_Gen + 0.2/(2*(t1_Gen-t0_Gen))
-            t0_Gen = t1_Gen
-            print(f_Gen)
-            if(pol_Gen):
-                pol_Gen = False
-            else:
-                pol_Gen = True
+# ~ try:
+    # ~ while True:
+        # ~ V_Gen=((adc.getLastConversionResults())-3287)*(0.223)
+        # ~ if ((pol_Gen == True) and (V_Gen < 0)) or ((pol_Gen == False) and (V_Gen > 0)):
+            # ~ t1_Gen = time.time()
+            # ~ f_Gen = 0.8*f_Gen + 0.2/(2*(t1_Gen-t0_Gen))
+            # ~ t0_Gen = t1_Gen
+            # ~ print(f_Gen)
+            # ~ if(pol_Gen):
+                # ~ pol_Gen = False
+            # ~ else:
+                # ~ pol_Gen = True
             
 
-except KeyboardInterrupt:
-    GPIO.cleanup()
+# ~ except KeyboardInterrupt:
+    # ~ GPIO.cleanup()
+
+
+def getVoltage():
+    return ((adc.getLastConversionResults())-3287)*(0.223)

@@ -34,8 +34,8 @@ def init():
     return screen
 
 
-def write(msg, font = "Courier New"):
-    myfont = pygame.font.SysFont(font, 40)
+def write(msg, font = "Courier New", size = 40):
+    myfont = pygame.font.SysFont(font, size)
     mytext = myfont.render(msg, True, (0,0,0))
     mytext = mytext.convert_alpha()
     return mytext

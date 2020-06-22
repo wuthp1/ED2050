@@ -16,9 +16,12 @@ def init():
     
     global scope
     rm = pyvisa.ResourceManager()
-    instr = rm.list_resources()
-    scope = rm.open_resource(instr[1])
-    #TODO: UI to choose USB Instrument instead of just taking instr[1]
+    #instr = rm.list_resources()
+    #scope = rm.open_resource('instr[2]')
+    try:
+        scope = rm.open_resource('USB0::1689::931::C010447::0::INSTR')
+    except:
+        return False
     return True
 
 def getID():

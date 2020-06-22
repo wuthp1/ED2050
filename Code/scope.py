@@ -13,7 +13,7 @@ CH_COUPLING_GND = 'GND'
 
 MEAS_SLOT_PHASE = 1
 MEAS_SLOT_FREQ =  2
-MEAS_SLOT_VRMS =  3
+MEAS_SLOT_VAMP =  3
 MEAS_SLOT_D =     4
 
 MEAS_TYPE_PHASE = 'PHA'
@@ -39,19 +39,20 @@ STR_CH_GEN = 	  'CH%d' %INT_CH_GEN
 STR_CH_NET =      'CH%d' %INT_CH_NET
 
 #scale settings
-CH_GEN_VER_SCA = '200'		#V/div, must be a string
-CH_NET_VER_SCA = '200'		#V/div, must be a string
-HOR_SCALE      = '10E-3' 	#s/div, must be a string
+CH_GEN_VER_SCA = '100'		#V/div, must be a string
+CH_NET_VER_SCA = '100'		#V/div, must be a string
+HOR_SCALE      = '4E-3' 	#s/div, must be a string
 
 #waveform vertical position settings
-CH_GEN_VER_POS = 0.5		#divisions, must be a number (not a string)
-CH_NET_VER_POS = -0.5		#divisions, must be a number (not a string)
+CH_GEN_VER_POS = 0		#divisions, must be a number (not a string)
+CH_NET_VER_POS = 0		#divisions, must be a number (not a string)
 
 
 #--- FUNCTIONS ---------------------------------------------------------
 
 def setup():
-	scope_driver.init()
+	if (scope_driver.init() == False):
+		return False
 	#scope_driver.lockFrontPanel()
 	scope_driver.setChannelBandwidth(INT_CH_GEN, CH_BANDW_FULL)
 	scope_driver.setChannelBandwidth(INT_CH_NET, CH_BANDW_FULL)
@@ -66,6 +67,7 @@ def setup():
 	scope_driver.setHorScale(HOR_SCALE)
 	scope_driver.turnOnChDisp(INT_CH_GEN)
 	scope_driver.turnOnChDisp(INT_CH_NET)
+	return True
 	
 def setPhaseMeas():
 	scope_driver.setMeasSrc1(STR_CH_GEN, MEAS_SLOT_PHASE)
@@ -92,12 +94,12 @@ def stopFreqMeas():
 	scope_driver.setMeasState(MEAS_STATE_OFF, MEAS_SLOT_FREQ)
 
 def setVoltMeas():
-	scope_driver.setMeasSrc1(STR_CH_GEN, MEAS_SLOT_VRMS)
-	scope_driver.setMeasType(MEAS_TYPE_VRMS, MEAS_SLOT_VRMS)
-	scope_driver.setMeasState(MEAS_STATE_ON, MEAS_SLOT_VRMS)
+	scope_driver.setMeasSrc1(STR_CH_GEN, MEAS_SLOT_VAMP)
+	scope_driver.setMeasType(MEAS_TYPE_AMPL, MEAS_SLOT_VAMP)
+	scope_driver.setMeasState(MEAS_STATE_ON, MEAS_SLOT_VAMP)
 
 def stopVoltMeas():
-	scope_driver.setMeasState(MEAS_STATE_OFF, MEAS_SLOT_VRMS)
+	scope_driver.setMeasState(MEAS_STATE_OFF, MEAS_SLOT_VAMP)
 
 def getPhase():
 	return scope_driver.getMeasVal(MEAS_SLOT_PHASE)
@@ -105,5 +107,5 @@ def getPhase():
 def getFreq():
 	return scope_driver.getMeasVal(MEAS_SLOT_FREQ)
 
-def getVrms():
-	return scope_driver.getMeasVal(MEAS_SLOT_VRMS)
+def getVampl():
+	return float(scope_driver.getMeasVal(MEAS_SLOT_VAMP))/2

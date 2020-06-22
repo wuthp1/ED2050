@@ -18,11 +18,11 @@ from time import sleep
 # import needed modules
 import time, signal, sys, os
 import RPi.GPIO as GPIO
+
+
 GPIO.setmode(GPIO.BCM)
 GPIO.setwarnings(False)
 
-# initialise variables
-delayTime = 0.5 # in Sekunden
 
 # assigning the ADS1x15 ADC
 
@@ -56,33 +56,38 @@ adc_channel_3 = 3    # Channel 3
 adc = ADS1x15(ic=ADS1115)
 
 #############################################################################################################
-pol_Gen = True
-pol_Net = True
+V_rms = 230
+
 V_Gen = 0
 V_Net = 0
 f_Gen = 50
+
 adc.startContinuousConversion(adc_channel_0, 6144, sps)
 
-# ~ t0_Gen = time.time()
-# ~ t0_Net = time.time()
-
-# ~ try:
-    # ~ while True:
-        # ~ V_Gen=((adc.getLastConversionResults())-3287)*(0.223)
-        # ~ if ((pol_Gen == True) and (V_Gen < 0)) or ((pol_Gen == False) and (V_Gen > 0)):
-            # ~ t1_Gen = time.time()
-            # ~ f_Gen = 0.8*f_Gen + 0.2/(2*(t1_Gen-t0_Gen))
-            # ~ t0_Gen = t1_Gen
-            # ~ print(f_Gen)
-            # ~ if(pol_Gen):
-                # ~ pol_Gen = False
-            # ~ else:
-                # ~ pol_Gen = True
-            
-
-# ~ except KeyboardInterrupt:
-    # ~ GPIO.cleanup()
-
-
 def getVoltage():
-    return ((adc.getLastConversionResults())-3287)*(0.223)
+    
+    V_Peak = 0
+    peak = False
+    V_rms = 0
+    n = 0
+    
+    for i in range(1,100):
+        V_Gen=((adc.getLastConversionResults())-3285)*(0.231)        
+        if(V_Gen > V_Peak):
+            V_Peak = V_Gen            
+            peak = True        
+        elif((V_Gen < 0) and peak == True):
+            V_rms += (V_Peak*0.707)
+            n+=1
+            V_Peak = 0
+            peak = False
+    return V_rms/n
+
+
+def getPressure():
+    adc.stopContinuousConversion()
+    p = adc.readADCSingleEnded(1,sps=8)
+    adc.startContinuousConversion(adc_channel_0, 6144, sps)#4.8V = 10 Bar; 4 mA*240 Ohm = 0.96V = 0bar 
+    return (p-680)/272
+0.96 --> 680
+4.8  --> 3400

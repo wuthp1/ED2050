@@ -16,52 +16,66 @@ License: GPL, see http://www.gnu.org/licenses/gpl.html
 
 #the next line is only needed for python2.x and not necessary for python3.x
 from __future__ import print_function, division
+
 import pygame
 import PM
-import DC_Src
 import draw
+import time
+import scope
+import gpio
 from math import sqrt,pow
+
+#defines
+SYNC_MAX_PHASE_DEV = 20
+SYNC_MAX_AMPL_DEV = 15
+SYNC_MAX_FREQ_DEV = 2
+
+SYNC_NOM_AMPL = 325
+SYNC_NOM_FREQ = 50
 
 WHITE = (255, 255, 255)
 
+NOMINAL_POWER = 2000
+
+
+
 clock = pygame.time.Clock()
-#calculate nominal values
-UN = 400
-SN = 1500
-PN = 1050
-QN = sqrt(pow(SN,2)-pow(PN,2))
-IN = SN/(UN*sqrt(3))
-
-screen = draw.init()
-screensize = screen.get_size()
-PM.init()
-
-# Create empty pygame surface.
-background = pygame.Surface(screen.get_size())
-# Fill the background white color.
-background.fill(WHITE)
-# Convert Surface object to make blitting faster.
-background = background.convert()
+scopeConnected = False
 
 
 
-mainloop = True
-# Desired framerate in frames per second. Try out other values.              
-FPS = 30
-
-
-while mainloop:
-    # Do not go faster than this framerate.
-    clock.tick(1)  
+def main():
     
-    for event in pygame.event.get():
-        # User presses QUIT-button.
-        if event.type == pygame.QUIT:
-            mainloop = False
-        elif event.type == pygame.KEYDOWN:
-            # User presses ESCAPE-Key
-            if event.key == pygame.K_ESCAPE:
-                mainloop = False
+    PM.init()                   #initialize MODBUS connection with PowerMeter
+    initScope()                 #initialize scope connections and its settings
+    screen = initScreen()       #initialize display
+
+    
+    syncOK = False              #do not allow do connect to the net, yet
+    
+    mainloop = True
+    while mainloop:
+        if (scopeConnected == False):
+            initScope()
+        mainloop = checkEvents()
+        
+    
+        
+        getPmData()             #read data from powermeter
+        drawData(screen)        #draw data on screen (chart and text)
+        pygame.display.flip()   #Update display.
+        checkSync()             #check if sync possible, enable, if yes
+    
+    # exit when mainloop has been left
+    pygame.quit()
+
+def getPmData():
+    global S,P,Q,PF
+    global S1,P1,Q1,PF1
+    global S2,P2,Q2,PF2
+    global S3,P3,Q3,PF3
+    global f,U1,U2,U3,UAVG
+    global I1,I2,I3, IAVG
     
     #get data from PM
     S=PM.readReg('Stot')*1000
@@ -87,6 +101,12 @@ while mainloop:
     f=PM.readReg('freq')
     U1=PM.readReg('U1N')
     U2=PM.readReg('U2N')
+    
+    if U2 > 100:
+        gpio.lampOn
+    else:
+        gpio.lampOff
+        
     U3=PM.readReg('U3N')
     UAVG = PM.readReg('ULN_AVG')
     
@@ -95,8 +115,9 @@ while mainloop:
     I3=PM.readReg('I3')
     IAVG = PM.readReg('I_AVG')
     
+def drawData(screen):
     #draw chart in the right half
-    chart = draw.op_chart(screen, P/PN, Q/QN)
+    chart = draw.op_chart(screen, P/NOMINAL_POWER, Q/NOMINAL_POWER)
     
     # Copy background to screen (position (0, 0) is upper left corner).
     screen.blit(background, (0,0))
@@ -140,13 +161,51 @@ while mainloop:
     
     screen.blit(draw.write('frequency:   ' + '%7.2f' %f + ' Hz'),(10,410))
     screen.blit(draw.write('rotor speed: ' + '%7.2f' %(f*30) + ' rpm'),(10,460))
-    screen.blit(draw.write('pressure:    '),(10,510))
     
-    
+    if(scopeConnected == False):
+        screen.blit(draw.write('CONNECT SCOPE!!!', "FreeMonoBold",100),(10,470)
 
+def checkSync():
+    if (scopeConnected == False):
+        return False
+    phase = float(scope.getPhase())
+    freq = float(scope.getFreq())
+    ampl = float(scope.getVampl())
+    if (phase < SYNC_MAX_PHASE_DEV) and (phase > (-SYNC_MAX_PHASE_DEV)) and (ampl > SYNC_NOM_AMPL - SYNC_MAX_AMPL_DEV) and (ampl < SYNC_NOM_AMPL + SYNC_MAX_AMPL_DEV) and (freq > SYNC_NOM_FREQ - SYNC_MAX_FREQ_DEV) and (freq < SYNC_NOM_FREQ + SYNC_MAX_FREQ_DEV):
+        gpio.enableSync()
+        time.sleep(1)
+    else:
+        gpio.disableSync()
+    return True
     
-    #Update Pygame display.
-    pygame.display.flip()
+def checkEvents():
+    for event in pygame.event.get():
+        # User presses QUIT-button.
+        if event.type == pygame.QUIT:
+            mainloop = False
+        elif event.type == pygame.KEYDOWN:
+            # User presses ESCAPE-Key
+            if event.key == pygame.K_ESCAPE:
+                mainloop = False
 
-# Finish Pygame.  
-pygame.quit()
+def initScreen():
+    screen = draw.init()
+    screensize = screen.get_size()
+    background = pygame.Surface(screen.get_size())
+    # Fill the background white color.
+    background.fill(WHITE)
+    # Convert Surface object to make blitting faster.
+    background = background.convert()
+    return screen
+
+def initScope():
+    if (scope.setup() == False):
+        return
+    scopeConnected = True
+    scope.setPhaseMeas()
+    scope.setFreqMeas()
+    scope.setVoltMeas()
+
+#main func MUST be called AFTER all fuction definitions
+#this is a workaround, so the main code is at the beginning of the file
+main()

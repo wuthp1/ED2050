@@ -64,3 +64,9 @@ def lampOn():
 
 def lampOff():
 	GPIO.output(RELAY_LAMP,RELAY_DE_ENERGIZED)
+	
+def pumpOn():
+	GPIO.output(RELAY_PUMP,RELAY_ENERGIZED)
+
+def pumpOff():
+	GPIO.output(RELAY_PUMP,RELAY_DE_ENERGIZED)

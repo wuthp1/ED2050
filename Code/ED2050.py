@@ -27,21 +27,23 @@ from math import sqrt,pow
 
 #defines
 SYNC_MAX_PHASE_DEV = 20
-SYNC_MAX_AMPL_DEV = 15
+SYNC_MAX_VOLT_DEV = 15
 SYNC_MAX_FREQ_DEV = 2
 
-SYNC_NOM_AMPL = 325
+SYNC_NOM_VOLT = 230
 SYNC_NOM_FREQ = 50
 
 WHITE = (255, 255, 255)
 
 NOMINAL_POWER = 2000
+MAX_FREQ = 2700/30
+MAX_VOLTAGE = 300
 
+MIN_PUMP_OFF_TIME = 1
 
-
-clock = pygame.time.Clock()
 scopeConnected = False
-
+ratingsExceeded = False
+pumpOffTime = 0;
 
 
 def main():
@@ -50,15 +52,21 @@ def main():
     initScope()                 #initialize scope connections and its settings
     screen = initScreen()       #initialize display
 
-    
+    global pumpOff
+    pumpOff = False
     syncOK = False              #do not allow do connect to the net, yet
     
     mainloop = True
     while mainloop:
-        if (scopeConnected == False):
-            initScope()
         mainloop = checkEvents()
         
+        if (scopeConnected == False):
+            initScope()
+            
+        if (pumpOff and (time.time() - pumpOffTime) > MIN_PUMP_OFF_TIME):
+            gpio.pumpOn()
+            pumpOff = False
+            ratingsExceeded = False
     
         
         getPmData()             #read data from powermeter
@@ -101,11 +109,7 @@ def getPmData():
     f=PM.readReg('freq')
     U1=PM.readReg('U1N')
     U2=PM.readReg('U2N')
-    
-    if U2 > 100:
-        gpio.lampOn
-    else:
-        gpio.lampOff
+
         
     U3=PM.readReg('U3N')
     UAVG = PM.readReg('ULN_AVG')
@@ -115,6 +119,9 @@ def getPmData():
     I3=PM.readReg('I3')
     IAVG = PM.readReg('I_AVG')
     
+    checkMaximumRatings(U2,S,f)
+
+
 def drawData(screen):
     #draw chart in the right half
     chart = draw.op_chart(screen, P/NOMINAL_POWER, Q/NOMINAL_POWER)
@@ -163,32 +170,47 @@ def drawData(screen):
     screen.blit(draw.write('rotor speed: ' + '%7.2f' %(f*30) + ' rpm'),(10,460))
     
     if(scopeConnected == False):
-        screen.blit(draw.write('CONNECT SCOPE!!!', "FreeMonoBold",100),(10,470)
+        screen.blit(draw.write('CONNECT SCOPE!!!', "FreeMonoBold",100),(10,470))
+    
+
+
 
 def checkSync():
+    global scopeConnected
     if (scopeConnected == False):
         return False
-    phase = float(scope.getPhase())
-    freq = float(scope.getFreq())
-    ampl = float(scope.getVampl())
-    if (phase < SYNC_MAX_PHASE_DEV) and (phase > (-SYNC_MAX_PHASE_DEV)) and (ampl > SYNC_NOM_AMPL - SYNC_MAX_AMPL_DEV) and (ampl < SYNC_NOM_AMPL + SYNC_MAX_AMPL_DEV) and (freq > SYNC_NOM_FREQ - SYNC_MAX_FREQ_DEV) and (freq < SYNC_NOM_FREQ + SYNC_MAX_FREQ_DEV):
+        
+    try:
+        phase = float(scope.getPhase())
+        freq = float(scope.getFreq())
+        volt = float(scope.getVampl())
+    except:
+        scopeConnected = False
+        return False
+        
+    if (phase < SYNC_MAX_PHASE_DEV) and (phase > (-SYNC_MAX_PHASE_DEV)) and (volt > SYNC_NOM_VOLT - SYNC_MAX_VOLT_DEV) and (volt < SYNC_NOM_VOLT + SYNC_MAX_VOLT_DEV) and (freq > SYNC_NOM_FREQ - SYNC_MAX_FREQ_DEV) and (freq < SYNC_NOM_FREQ + SYNC_MAX_FREQ_DEV):
         gpio.enableSync()
-        time.sleep(1)
+        time.sleep(0.2)
     else:
         gpio.disableSync()
     return True
-    
+
+
 def checkEvents():
     for event in pygame.event.get():
         # User presses QUIT-button.
         if event.type == pygame.QUIT:
-            mainloop = False
+            return  False
         elif event.type == pygame.KEYDOWN:
             # User presses ESCAPE-Key
             if event.key == pygame.K_ESCAPE:
-                mainloop = False
+                return False
+    return True
+
+
 
 def initScreen():
+    global background, screensize
     screen = draw.init()
     screensize = screen.get_size()
     background = pygame.Surface(screen.get_size())
@@ -198,13 +220,35 @@ def initScreen():
     background = background.convert()
     return screen
 
+
 def initScope():
+    global scopeConnected
     if (scope.setup() == False):
         return
     scopeConnected = True
     scope.setPhaseMeas()
     scope.setFreqMeas()
     scope.setVoltMeas()
+    
+
+def checkMaximumRatings(U2, S, f):
+    #strobo lamp must not be turned on 
+    if (U2 > 100):
+        gpio.lampOn()
+    else:
+        gpio.lampOff()
+    
+    global ratingsExceeded, pumpOffTime
+    if (S > NOMINAL_POWER) or (f > MAX_FREQ) or (U2 > MAX_VOLTAGE):
+        gpio.pumpOff()
+        ratingsExceeded = True
+        pumpOffTime = time.time()
+
+#def checkExcSwitch():
+#    if gpio.getExcState():
+#        #start automatic control
+#    else:
+#        #stop automatic control
 
 #main func MUST be called AFTER all fuction definitions
 #this is a workaround, so the main code is at the beginning of the file

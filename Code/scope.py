@@ -95,7 +95,7 @@ def stopFreqMeas():
 
 def setVoltMeas():
 	scope_driver.setMeasSrc1(STR_CH_GEN, MEAS_SLOT_VAMP)
-	scope_driver.setMeasType(MEAS_TYPE_AMPL, MEAS_SLOT_VAMP)
+	scope_driver.setMeasType(MEAS_TYPE_VRMS, MEAS_SLOT_VAMP)
 	scope_driver.setMeasState(MEAS_STATE_ON, MEAS_SLOT_VAMP)
 
 def stopVoltMeas():
@@ -108,4 +108,4 @@ def getFreq():
 	return scope_driver.getMeasVal(MEAS_SLOT_FREQ)
 
 def getVampl():
-	return float(scope_driver.getMeasVal(MEAS_SLOT_VAMP))/2
+	return float(scope_driver.getMeasVal(MEAS_SLOT_VAMP))

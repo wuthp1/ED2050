@@ -85,9 +85,8 @@ def getVoltage():
 
 
 def getPressure():
-    adc.stopContinuousConversion()
+    #adc.stopContinuousConversion()
     p = adc.readADCSingleEnded(1,sps=8)
-    adc.startContinuousConversion(adc_channel_0, 6144, sps)#4.8V = 10 Bar; 4 mA*240 Ohm = 0.96V = 0bar 
-    return (p-680)/272
-0.96 --> 680
-4.8  --> 3400
+    #adc.startContinuousConversion(adc_channel_0, 6144, sps)
+    return (p-680)/272.0
+

@@ -1,37 +1,37 @@
 #/usr/bin/env python
 # -*- coding: utf-8 -*-
 
-"""
-002_display_fps.py
+"""ED2050 main script.
 
-Open a Pygame window and display framerate.
 Program terminates by pressing the ESCAPE-Key.
- 
-works with python2.7 and python3.4 
-
-URL    : http://thepythongamebook.com/en:part2:pygame:step002
-Author : horst.jens@spielend-programmieren.at
-License: GPL, see http://www.gnu.org/licenses/gpl.html
 """
 
-#the next line is only needed for python2.x and not necessary for python3.x
-from __future__ import print_function, division
+#--- external modules
 
+#the next line is only needed for python2.x and not necessary for python3.x --> Würkli? Chame doch lösche?! --> TODO
+# from __future__ import print_function, division
+from math import sqrt,pow
+from simple_pid import PID
 import pygame
+import time
+
+#--- own modules
+
 import PM
 import draw
-import time
 import scope
 import gpio
-from math import sqrt,pow
+import dc_src_driver
+#import adc_driver --> ADC hat sich in Rauch aufgelöst
 
-#defines
+
+#--- defines
 SYNC_MAX_PHASE_DEV = 20
 SYNC_MAX_VOLT_DEV = 15
 SYNC_MAX_FREQ_DEV = 2
 
-SYNC_NOM_VOLT = 230
-SYNC_NOM_FREQ = 50
+NOM_VOLT = 230
+NOM_FREQ = 50
 
 WHITE = (255, 255, 255)
 
@@ -41,43 +41,77 @@ MAX_VOLTAGE = 300
 
 MIN_PUMP_OFF_TIME = 1
 
+PID_KP = 0.1
+PID_KI = 0.001
+PID_KD = 0
+
+
 scopeConnected = False
+dcSrcConnected = False
 ratingsExceeded = False
-pumpOffTime = 0;
+pumpOffTime = 0
+Vexc = 10
+volt = 0
+excSwitchState = False
 
+"""ED2050 main function.
 
+Handles all the processes and connections of the ED2050 power plant model
+"""
 def main():
     
     PM.init()                   #initialize MODBUS connection with PowerMeter
-    initScope()                 #initialize scope connections and its settings
+    initDcSrc()                 #initialize USB connection with DC Source
+    initScope()                 #initialize USB connection with scope and scope settings
+    initExcCtrl()
     screen = initScreen()       #initialize display
 
-    global pumpOff
-    pumpOff = False
-    syncOK = False              #do not allow do connect to the net, yet
+    global ratingsExceeded, dcSrcConnected, scopeConnected
+    
+    syncOK = False              #do not allow do connect to the grid, yet
+    genState = False
     
     mainloop = True
     while mainloop:
         mainloop = checkEvents()
         
+        if (dcSrcConnected == False):
+            initDcSrc()
+        
         if (scopeConnected == False):
             initScope()
             
-        if (pumpOff and (time.time() - pumpOffTime) > MIN_PUMP_OFF_TIME):
+        if (ratingsExceeded and (time.time() - pumpOffTime) > MIN_PUMP_OFF_TIME):
             gpio.pumpOn()
-            pumpOff = False
             ratingsExceeded = False
-    
         
-        getPmData()             #read data from powermeter
+        if(gpio.getGenState() == True) and (genState == False):
+            dc_src_driver.OutputOn()
+            genState = True
+        elif(gpio.getGenState() == False) and (genState == True):
+            dc_src_driver.OutputOff()
+            genState = False
+        
+        checkSync()
+        getData()
+        checkSync()             #read data from powermeter
         drawData(screen)        #draw data on screen (chart and text)
+        checkSync()
         pygame.display.flip()   #Update display.
+        
         checkSync()             #check if sync possible, enable, if yes
+        
     
     # exit when mainloop has been left
+    gpio.lampOff()
     pygame.quit()
 
-def getPmData():
+"""Reads Data from Powermeter.
+
+Reads the relevant power, voltage and current data from the powermeter
+via MODBUS.
+"""
+def getData():
     global S,P,Q,PF
     global S1,P1,Q1,PF1
     global S2,P2,Q2,PF2
@@ -121,7 +155,12 @@ def getPmData():
     
     checkMaximumRatings(U2,S,f)
 
+"""Visalizes measured data an screen.
 
+Args:
+        screen (pygame.Surface): 
+
+"""
 def drawData(screen):
     #draw chart in the right half
     chart = draw.op_chart(screen, P/NOMINAL_POWER, Q/NOMINAL_POWER)
@@ -166,17 +205,18 @@ def drawData(screen):
     
     pygame.draw.line(screen, (0,0,0), (0,385),(screensize[0],385))
     
-    screen.blit(draw.write('frequency:   ' + '%7.2f' %f + ' Hz'),(10,410))
-    screen.blit(draw.write('rotor speed: ' + '%7.2f' %(f*30) + ' rpm'),(10,460))
+    screen.blit(draw.write('frequency:      ' + '%7.2f' %f + ' Hz'),(10,410))
+    screen.blit(draw.write('rotor speed:    ' + '%7.2f' %(f*30) + ' rpm'),(10,460))
     
     if(scopeConnected == False):
-        screen.blit(draw.write('CONNECT SCOPE!!!', "FreeMonoBold",100),(10,470))
+        screen.blit(draw.write('CONNECT SCOPE!!!', "FreeMonoBold",100),(10,600))
+    
+    if(dcSrcConnected == False):
+        screen.blit(draw.write('CONNECT DC SOURCE!!!', "FreeMonoBold",100),(10,700))
     
 
-
-
 def checkSync():
-    global scopeConnected
+    global scopeConnected, volt
     if (scopeConnected == False):
         return False
         
@@ -187,8 +227,12 @@ def checkSync():
     except:
         scopeConnected = False
         return False
-        
-    if (phase < SYNC_MAX_PHASE_DEV) and (phase > (-SYNC_MAX_PHASE_DEV)) and (volt > SYNC_NOM_VOLT - SYNC_MAX_VOLT_DEV) and (volt < SYNC_NOM_VOLT + SYNC_MAX_VOLT_DEV) and (freq > SYNC_NOM_FREQ - SYNC_MAX_FREQ_DEV) and (freq < SYNC_NOM_FREQ + SYNC_MAX_FREQ_DEV):
+    
+    if checkExcSwitch():
+        updateExcCtrl()
+    
+    
+    if (phase < SYNC_MAX_PHASE_DEV) and (phase > (-SYNC_MAX_PHASE_DEV)) and (volt > NOM_VOLT - SYNC_MAX_VOLT_DEV) and (volt < NOM_VOLT + SYNC_MAX_VOLT_DEV) and (freq > NOM_FREQ - SYNC_MAX_FREQ_DEV) and (freq < NOM_FREQ + SYNC_MAX_FREQ_DEV):
         gpio.enableSync()
         time.sleep(0.2)
     else:
@@ -206,7 +250,6 @@ def checkEvents():
             if event.key == pygame.K_ESCAPE:
                 return False
     return True
-
 
 
 def initScreen():
@@ -229,10 +272,17 @@ def initScope():
     scope.setPhaseMeas()
     scope.setFreqMeas()
     scope.setVoltMeas()
-    
+
+
+def initDcSrc():
+    global dcSrcConnected
+    if (dc_src_driver.init() == False):
+        return
+    dcSrcConnected = True
+
 
 def checkMaximumRatings(U2, S, f):
-    #strobo lamp must not be turned on 
+    #strobo lamp must not be turned on at small voltages 
     if (U2 > 100):
         gpio.lampOn()
     else:
@@ -244,12 +294,29 @@ def checkMaximumRatings(U2, S, f):
         ratingsExceeded = True
         pumpOffTime = time.time()
 
-#def checkExcSwitch():
-#    if gpio.getExcState():
-#        #start automatic control
-#    else:
-#        #stop automatic control
 
-#main func MUST be called AFTER all fuction definitions
+def initExcCtrl():
+    global pid
+    pid = PID(PID_KP, PID_KI, PID_KD, setpoint=NOM_VOLT)
+
+
+def updateExcCtrl():
+    global Vexc
+    if dcSrcConnected == False:
+        return
+    Vrms = volt
+    Vexc += pid(Vrms)
+    if Vexc > 34:
+        Vexc = 34
+    
+    dc_src_driver.setVoltage(Vexc)
+    
+def checkExcSwitch():
+    if gpio.getExcState():
+        return True
+    else:
+        return False
+
+#main func MUST be called AFTER all function definitions
 #this is a workaround, so the main code is at the beginning of the file
 main()

@@ -52,5 +52,8 @@ def init(port='/dev/serial0', addr=1, baudrate=38400):
     pm.serial.baudrate=baudrate
 
 def readReg(regName):
-    return pm.read_float(regs[regName]+OFFSET)
+    try:
+        return pm.read_float(regs[regName]+OFFSET)
+    except:
+        return 0
 

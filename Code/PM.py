@@ -1,3 +1,6 @@
+#/usr/bin/env python
+# -*- coding: utf-8 -*-
+
 """Provides API to communicate with powermeter PM3250.
 
 This package is used to set up the connection to Schneider Electric
@@ -42,16 +45,23 @@ regs = {
     'freq'    : 3110,
     }
 
+
 def init(port='/dev/serial0', addr=1, baudrate=38400):
-    """opens connection to powermeter.
-    
-    
+    """Initializes Serial port for MODBUS connection with power meter.
     """
+
     global pm
     pm = minimalmodbus.Instrument(port,addr)
     pm.serial.baudrate=baudrate
 
+
 def readReg(regName):
+    """Reads register of powermeter.
+
+    Returns:
+        float: value of read register, if read was succesfull: 0 otherwise
+    """
+    
     try:
         return pm.read_float(regs[regName]+OFFSET)
     except:

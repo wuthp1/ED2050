@@ -8,8 +8,6 @@ Program terminates by pressing the ESCAPE-Key.
 
 #--- external modules
 
-#the next line is only needed for python2.x and not necessary for python3.x --> Würkli? Chame doch lösche?! --> TODO
-# from __future__ import print_function, division
 from math import sqrt,pow
 from simple_pid import PID
 import pygame
@@ -22,31 +20,25 @@ import draw
 import scope
 import gpio
 import dc_src_driver
-#import adc_driver --> ADC hat sich in Rauch aufgelöst
 
 
 #--- defines
-SYNC_MAX_PHASE_DEV = 20
-SYNC_MAX_VOLT_DEV = 15
-SYNC_MAX_FREQ_DEV = 2
-
-NOM_VOLT = 230
-NOM_FREQ = 50
-
-WHITE = (255, 255, 255)
-
-NOMINAL_POWER = 2000
-MAX_FREQ = 2700/30
-MAX_VOLTAGE = 300
-
-MIN_PUMP_OFF_TIME = 1
-
-PID_KP = 0.1
-PID_KI = 0.001
-PID_KD = 0
+SYNC_MAX_PHASE_DEV  = 20
+SYNC_MAX_VOLT_DEV   = 15
+SYNC_MAX_FREQ_DEV   = 2
+NOM_VOLT            = 230
+NOM_FREQ            = 50
+WHITE               = (255, 255, 255)
+NOMINAL_POWER       = 2000
+MAX_FREQ            = 2700/30
+MAX_VOLTAGE         = 300
+MIN_PUMP_OFF_TIME   = 1
+PID_KP              = 0.1
+PID_KI              = 0.001
+PID_KD              = 0
 
 
-scopeConnected = False
+scopeConnected = True
 dcSrcConnected = False
 ratingsExceeded = False
 pumpOffTime = 0
@@ -54,16 +46,16 @@ Vexc = 10
 volt = 0
 excSwitchState = False
 
-"""ED2050 main function.
 
-Handles all the processes and connections of the ED2050 power plant model
-"""
 def main():
-    
+    """ED2050 main function.
+
+    Handles all the processes and connections of the ED2050 power plant model
+    """
     PM.init()                   #initialize MODBUS connection with PowerMeter
     initDcSrc()                 #initialize USB connection with DC Source
     initScope()                 #initialize USB connection with scope and scope settings
-    initExcCtrl()
+    #initExcCtrl()
     screen = initScreen()       #initialize display
 
     global ratingsExceeded, dcSrcConnected, scopeConnected
@@ -106,12 +98,13 @@ def main():
     gpio.lampOff()
     pygame.quit()
 
-"""Reads Data from Powermeter.
 
-Reads the relevant power, voltage and current data from the powermeter
-via MODBUS.
-"""
 def getData():
+    """Reads Data from Powermeter.
+
+    Reads the relevant power, voltage and current data from the powermeter
+    via MODBUS.
+    """
     global S,P,Q,PF
     global S1,P1,Q1,PF1
     global S2,P2,Q2,PF2
@@ -155,13 +148,14 @@ def getData():
     
     checkMaximumRatings(U2,S,f)
 
-"""Visalizes measured data an screen.
 
-Args:
-        screen (pygame.Surface): 
-
-"""
 def drawData(screen):
+    """Visalizes measured data on screen.
+    
+    Args:
+        screen (pygame.Surface): screen object to draw data on it
+
+    """
     #draw chart in the right half
     chart = draw.op_chart(screen, P/NOMINAL_POWER, Q/NOMINAL_POWER)
     
@@ -213,12 +207,20 @@ def drawData(screen):
     
     if(dcSrcConnected == False):
         screen.blit(draw.write('CONNECT DC SOURCE!!!', "FreeMonoBold",100),(10,700))
-    
+
 
 def checkSync():
+    """Checks if sync wih grid is possible and enables connector accordingly.
+
+    This method compares phase, frequency and phase of grid an generator
+    voltage (phase 2). If the deviation is small enough to synchronize with
+    the grid, the according connector gets enabled, or disabled otherwise.
+    The data is measured by the scope. If the connection to the scope is
+    interrupted, sync is disabled. 
+    """
     global scopeConnected, volt
     if (scopeConnected == False):
-        return False
+        return
         
     try:
         phase = float(scope.getPhase())
@@ -226,21 +228,29 @@ def checkSync():
         volt = float(scope.getVampl())
     except:
         scopeConnected = False
-        return False
+        gpio.disableSync()
+        return
     
-    if checkExcSwitch():
-        updateExcCtrl()
+#    if checkExcSwitch():
+#        updateExcCtrl()
     
     
-    if (phase < SYNC_MAX_PHASE_DEV) and (phase > (-SYNC_MAX_PHASE_DEV)) and (volt > NOM_VOLT - SYNC_MAX_VOLT_DEV) and (volt < NOM_VOLT + SYNC_MAX_VOLT_DEV) and (freq > NOM_FREQ - SYNC_MAX_FREQ_DEV) and (freq < NOM_FREQ + SYNC_MAX_FREQ_DEV):
+    if (phase < SYNC_MAX_PHASE_DEV) and (phase > (-SYNC_MAX_PHASE_DEV)) and (volt > NOM_VOLT - SYNC_MAX_VOLT_DEV) and (volt < NOM_VOLT + SYNC_MAX_VOLT_DEV) and (freq > NOM_FREQ - SYNC_MAX_FREQ_DEV) and (freq < NOM_FREQ + SYNC_MAX_FREQ_DEV) and (ratingsExceeded == False):
         gpio.enableSync()
         time.sleep(0.2)
     else:
         gpio.disableSync()
-    return True
 
 
 def checkEvents():
+    """Checks, if ESC or QUIT (not relevant because of Fullscreen) is pressed.
+    
+    Checks, if either ESC or QUIT (cross in upper right corner )is pressed.
+    Because of the fullscreen mode, quit is not relevant in this program.
+    
+    Returns:
+        bool: False, if program has to be closed; True, otherwise
+    """
     for event in pygame.event.get():
         # User presses QUIT-button.
         if event.type == pygame.QUIT:
@@ -253,6 +263,11 @@ def checkEvents():
 
 
 def initScreen():
+    """Initializes a fullscreen surface with white white background.
+    
+    Returns:
+        pygame.Surface: fullscreen surface with white white background
+    """
     global background, screensize
     screen = draw.init()
     screensize = screen.get_size()
@@ -265,6 +280,14 @@ def initScreen():
 
 
 def initScope():
+    """Initalizes connection to scope and scope settings.
+    
+    Trys to establish a USB connection to scope. If successful, initializes
+    measurements on scope.
+
+    Returns:
+        bool: True, if connection successful; False otherwise
+    """
     global scopeConnected
     if (scope.setup() == False):
         return
@@ -275,6 +298,13 @@ def initScope():
 
 
 def initDcSrc():
+    """Initalizes connection to DC Source.
+    
+    Trys to establish a USB connection to DC Source.
+
+    Returns:
+        bool: True, if connection successful; False otherwise
+    """
     global dcSrcConnected
     if (dc_src_driver.init() == False):
         return
@@ -282,7 +312,9 @@ def initDcSrc():
 
 
 def checkMaximumRatings(U2, S, f):
-    #strobo lamp must not be turned on at small voltages 
+    """Checks, if maximum ratings are maintained, shuts down pump, otherwise. 
+    """
+    #strobo lamp must not be turned on at small voltages
     if (U2 > 100):
         gpio.lampOn()
     else:
@@ -291,16 +323,21 @@ def checkMaximumRatings(U2, S, f):
     global ratingsExceeded, pumpOffTime
     if (S > NOMINAL_POWER) or (f > MAX_FREQ) or (U2 > MAX_VOLTAGE):
         gpio.pumpOff()
+        gpio.disableSync()
         ratingsExceeded = True
         pumpOffTime = time.time()
 
 
 def initExcCtrl():
+    """Initializes PID controller for excitation current control.
+    """
     global pid
     pid = PID(PID_KP, PID_KI, PID_KD, setpoint=NOM_VOLT)
 
 
 def updateExcCtrl():
+    """Updates excitation voltage according to PID controller. 
+    """
     global Vexc
     if dcSrcConnected == False:
         return
@@ -310,8 +347,14 @@ def updateExcCtrl():
         Vexc = 34
     
     dc_src_driver.setVoltage(Vexc)
-    
+
+
 def checkExcSwitch():
+    """Reads position of excitation control switch (Auto/Manual)
+    
+    Returns:
+        bool: True, if switch on AUTO; False, if MANUAL
+    """
     if gpio.getExcState():
         return True
     else:

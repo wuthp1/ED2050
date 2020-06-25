@@ -1,7 +1,4 @@
 """provides API for USB communication with scope.
- TODO try catch security shit
-
-TODO return statements
 """
 
 
@@ -21,8 +18,13 @@ def init():
     try:
         scope = rm.open_resource('USB0::1689::931::C010447::0::INSTR')
     except:
+        try:
+            rm.close()
+        except:
+            return False
         return False
     return True
+
 
 def getID():
     """Reads id from scope.
@@ -31,8 +33,6 @@ def getID():
         str: identification string received from scope"""
     return scope.query('*IDN?')
 
-
-#channel settings
 
 def getChannelInfo(chNr):
     """Reads scope channel info.
@@ -44,6 +44,7 @@ def getChannelInfo(chNr):
         str: channel info received from scope"""
     return scope.query('CH%d?' %chNr)
 
+
 def getChannelBandwidth(chNr):
     """Reads scope channel bandwidth setting.
     
@@ -53,6 +54,7 @@ def getChannelBandwidth(chNr):
     Returns:
         str: bandwith setting received from scope"""
     return scope.query('CH%d:BAN?' %chNr)
+
     
 def setChannelBandwidth(chNr,bandwidth):
     """Sets scope channel bandwidth.
@@ -68,7 +70,8 @@ def setChannelBandwidth(chNr,bandwidth):
         bool: True"""
     scope.write('CH%d:BAN ' %chNr + bandwidth)
     return True
-    
+
+
 def getChannelCoupling(chNr):
     """Reads scope input attenuator coupling.
     
@@ -79,6 +82,7 @@ def getChannelCoupling(chNr):
         str: current scope input attenuator coupling setting
     """
     return scope.query('CH%d:COUP?' %chNr)
+
 
 def setChannelCoupling(chNr, coupl):
     """Sets scope input attenuator coupling.
@@ -98,6 +102,7 @@ def setChannelCoupling(chNr, coupl):
     scope.write('CH%d:COUP ' %chNr + coupl)
     return True
 
+
 def getChannelVertPos(chNr):
     """Reads vertical position of channel in divisions.
     
@@ -108,7 +113,8 @@ def getChannelVertPos(chNr):
         (str): vertical position of channel in divisions
     """
     return scope.query('CH%d:POS?' %chNr)
-    
+
+
 def setChannelVertPos(chNr, div):
     """Sets vertical position of channel in divisions.
     
@@ -129,6 +135,7 @@ def setChannelVertPos(chNr, div):
     scope.write('CH%d:POS %.4f' %(chNr,div))
     return True
 
+
 def getChannelVertScale(chNr):
     """Reads vertical scale of channel in volts/div.
     
@@ -139,6 +146,7 @@ def getChannelVertScale(chNr):
         (str): vertical scale of channel in volts/div.
     """
     return scope.query('CH%d:SCA?' %chNr)
+  
     
 def setChannelVertScale(chNr, scale):
     """Set vertical scale of channel in volts/div.
@@ -155,8 +163,6 @@ def setChannelVertScale(chNr, scale):
     return True
 
 
-#horizontal settings
-
 def getHorScale():
     """Reads scope time base horizontal scale.
     
@@ -164,6 +170,7 @@ def getHorScale():
         (str): scope time base horizontal scale in s/div
     """
     return scope.query('HOR:SCA?')
+
 
 def setHorScale(scale):
     """Sets scope time base horizontal scale.
@@ -177,8 +184,6 @@ def setHorScale(scale):
     """
     return scope.write('HOR:SCA ' + scale)
 
-
-#measurement
 
 def setMeasSrc1(src, slot):
     """Sets measurement source 1.
@@ -196,6 +201,7 @@ def setMeasSrc1(src, slot):
     
     scope.write('MEASU:MEAS%d:SOURCE1 ' %slot + src)
     return True
+
     
 def setMeasSrc2(src, slot):
     """Sets measurement source 2.
@@ -212,6 +218,7 @@ def setMeasSrc2(src, slot):
     
     scope.write('MEASU:MEAS%d:SOURCE2 ' %slot + src)
     return True
+
 
 def setMeasType(measType, slot):
     """Sets what should be measured.
@@ -234,6 +241,7 @@ def setMeasType(measType, slot):
     scope.write('MEASU:MEAS%d:TYP ' %slot + measType)
     return True
 
+
 def setMeasState(state, slot):
     """Starts/stops measurements of specified slot.
     
@@ -254,6 +262,7 @@ def setMeasState(state, slot):
     scope.write('MEASU:MEAS%d:STATE ' %slot + state)
     return True
 
+
 def getMeasVal(slot):
     """Reads measured value of specified slot.
     
@@ -264,6 +273,7 @@ def getMeasVal(slot):
         (str): Measured value
     """
     return scope.query('MEASU:MEAS%d:VAL?' %slot)
+
 
 def setImmMeasSrc1(src):
     """Sets immediate measurement source 1.
@@ -303,6 +313,7 @@ def setImmMeasSrc2(src):
     scope.write('MEASU:IMM:SOU2 ' + src)
     return True
 
+
 def setImmMeasType(measType):
     """Sets what should be measured.
     
@@ -320,6 +331,7 @@ def setImmMeasType(measType):
     scope.write('MEASU:IMM:TYP ' + measType)
     return True
 
+
 def getImmMeasVal():
     """Reads measured immediate value.
         
@@ -328,7 +340,6 @@ def getImmMeasVal():
     """
     return scope.query('MEASU:IMM:VAL?')
 
-#miscellaneous
 
 def lockFrontPanel():
     """Locks all buttons and knobs on the front panel of the scope.
@@ -339,6 +350,7 @@ def lockFrontPanel():
     scope.write('LOC ALL')
     return True
 
+
 def unlockFrontPanel():
     """Unlocks all buttons and knobs on the front panel of the scope.
     
@@ -347,6 +359,7 @@ def unlockFrontPanel():
     """
     scope.write('UNL ALL')
     return True
+
 
 def selectChannel(chNr,state):
     """Turns display of specified channel on or off
@@ -363,6 +376,7 @@ def selectChannel(chNr,state):
     """
     scope.write('SEL:CH%d ' %chNr + state)
     return True
+
 
 def setEdgeTrigger(source, coupl='HFR', slope='RIS'):
     """Sets up edge trigger.
@@ -389,6 +403,7 @@ def setEdgeTrigger(source, coupl='HFR', slope='RIS'):
     scope.write('TRIG:A:EDGE:SOU ' + source) 
     return True
 
+
 def setProbeGain(chNr, gain):
     """Sets ups probe gain.
     
@@ -407,6 +422,7 @@ def setProbeGain(chNr, gain):
     scope.write('CH%d:PRO:GAIN ' %chNr + gain)
     return True
 
+
 def turnOnChDisp(chNr):
     """Turns display of selected channel on.
     
@@ -418,6 +434,7 @@ def turnOnChDisp(chNr):
     """
     scope.write('SEL:CH%d ON' %chNr)
     return True
+
     
 def turnOffChDisp(chNr):
     """Turns display of selected channel off.

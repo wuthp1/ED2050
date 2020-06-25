@@ -1,3 +1,14 @@
+#/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+
+"""library to set and read out the needed GPIOs of the Raspberry Pi for the ED2050.
+
+This library provides functions to set the state of the used Relays of
+the relay board and to read and set the used GPIOs of the Raspberry Pi.
+ 
+"""
+
 import RPi.GPIO as GPIO
 
 #--- DEFINES -----------------------------------------------------------
@@ -45,28 +56,58 @@ GPIO.setup(GPIO_GEN_CONNECTED, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 GPIO.setup(GPIO_SYNCED, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)
 
 def enableSync():
+	"""Enables connector for synchronisation with grid.
+	"""
 	GPIO.output(RELAY_SYNC,RELAY_ENERGIZED)
 
 def disableSync():
+	"""Disables and turns off connector for synchronisation with grid.
+	"""
 	GPIO.output(RELAY_SYNC,RELAY_DE_ENERGIZED)
 
 def getGenState():
+	"""Returns state of "Generator on" connector
+	
+	Returns:
+		bool: True if "Generator On"; False if "Generator Off".
+	
+	"""
 	return GPIO.input(GPIO_GEN_CONNECTED)
 
 def getSyncState():
+	"""Returns synchronisation state.
+	
+	Returns:
+		bool: True, if synchronised with grid; False, otherwise.
+		
+	"""
 	return GPIO.input(GPIO_SYNCED)
 
 def getExcState():
+	"""Returns state of excitation control rotary switch.
+	
+	Returns:
+		bool: True if "automatic control"; False if "manual control".
+	
+	"""
 	return GPIO.input(GPIO_EXC_CTRL)
 
 def lampOn():
+	"""Turns on strobo lamp.
+	"""
 	GPIO.output(RELAY_LAMP,RELAY_ENERGIZED)
 
 def lampOff():
+	"""Turns off strobo lamp.
+	"""
 	GPIO.output(RELAY_LAMP,RELAY_DE_ENERGIZED)
 	
 def pumpOn():
+	"""Enables pump connector.
+	"""
 	GPIO.output(RELAY_PUMP,RELAY_ENERGIZED)
 
 def pumpOff():
+	"""Disables and turns off pump connector.
+	"""
 	GPIO.output(RELAY_PUMP,RELAY_DE_ENERGIZED)

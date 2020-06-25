@@ -1,3 +1,6 @@
+
+
+
 #############################################################################################################
 ### Copyright by Joy-IT
 ### Published under Creative Commons Attribution-NonCommercial-ShareAlike 3.0 Unported License
@@ -64,12 +67,14 @@ f_Gen = 50
 
 adc.startContinuousConversion(adc_channel_0, 6144, sps)
 
+
 def getVoltage():
     
     V_Peak = 0
     peak = False
     V_rms = 0
     n = 0
+    
     
     for i in range(1,100):
         V_Gen=((adc.getLastConversionResults())-3285)*(0.231)        
@@ -85,8 +90,8 @@ def getVoltage():
 
 
 def getPressure():
-    #adc.stopContinuousConversion()
+    adc.stopContinuousConversion()
     p = adc.readADCSingleEnded(1,sps=8)
-    #adc.startContinuousConversion(adc_channel_0, 6144, sps)
+    adc.startContinuousConversion(adc_channel_0, 6144, sps)
     return (p-680)/272.0
 

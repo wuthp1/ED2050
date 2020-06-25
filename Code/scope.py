@@ -1,3 +1,11 @@
+#/usr/bin/env python
+# -*- coding: utf-8 -*-
+
+"""provides API to communicate with scope Tektronix DPO 2024B
+
+This library is proprietary for the ED2050 project and doesn't cover 
+the full functional range of the scope.
+"""
 #--- MODULES -----------------------------------------------------------
 
 import scope_driver
@@ -51,6 +59,12 @@ CH_NET_VER_POS = 0		#divisions, must be a number (not a string)
 #--- FUNCTIONS ---------------------------------------------------------
 
 def setup():
+	"""initializes scope connection and configures probes and display.
+
+	Returns:
+		bool: True if connection successful; False otherwise.
+
+	"""
 	if (scope_driver.init() == False):
 		return False
 	#scope_driver.lockFrontPanel()
@@ -68,44 +82,97 @@ def setup():
 	scope_driver.turnOnChDisp(INT_CH_GEN)
 	scope_driver.turnOnChDisp(INT_CH_NET)
 	return True
-	
+
+
 def setPhaseMeas():
+	"""Configures phase measurement from CH1 to CH2.
+	"""
 	scope_driver.setMeasSrc1(STR_CH_GEN, MEAS_SLOT_PHASE)
 	scope_driver.setMeasSrc2(STR_CH_NET, MEAS_SLOT_PHASE)
 	scope_driver.setMeasType(MEAS_TYPE_PHASE, MEAS_SLOT_PHASE)
 	scope_driver.setMeasState(MEAS_STATE_ON, MEAS_SLOT_PHASE)
-	
+
+
 def stopPhaseMeas():
+	"""Stops phase measurement.
+	"""
 	scope_driver.setMeasState(MEAS_STATE_OFF, MEAS_SLOT_PHASE)
 
+
 def setFreqMeas():
+	"""Configures frequency measurement.
+	"""
 	scope_driver.setMeasSrc1(STR_CH_GEN, MEAS_SLOT_FREQ)
 	scope_driver.setMeasType(MEAS_TYPE_FREQ, MEAS_SLOT_FREQ)
 	scope_driver.setMeasState(MEAS_STATE_ON, MEAS_SLOT_FREQ)
 
+
 def setImmMeas():
+	"""Configures frequency measurement as immediate measurement. (faster, no display)
+	"""
 	scope_driver.setImmMeasSrc1(STR_CH_GEN)
 	scope_driver.setImmMeasType(MEAS_TYPE_FREQ)
 
+
 def getImmMeasVal():
+	"""Reads immediate measurement result.
+
+	Returns:
+		float: immediate measurement result
+	"""
 	return scope_driver.getImmMeasVal()
 
+
 def stopFreqMeas():
+	"""Stops frequency measurement,
+	"""
 	scope_driver.setMeasState(MEAS_STATE_OFF, MEAS_SLOT_FREQ)
 
+
 def setVoltMeas():
+	"""Configures RMS voltage measurement.
+	"""
 	scope_driver.setMeasSrc1(STR_CH_GEN, MEAS_SLOT_VAMP)
 	scope_driver.setMeasType(MEAS_TYPE_VRMS, MEAS_SLOT_VAMP)
 	scope_driver.setMeasState(MEAS_STATE_ON, MEAS_SLOT_VAMP)
 
+
 def stopVoltMeas():
+	"""Stops RMS voltage measurement.
+	"""
 	scope_driver.setMeasState(MEAS_STATE_OFF, MEAS_SLOT_VAMP)
 
+
 def getPhase():
+	"""Reads phase measurement result.
+
+	Returns:
+		float: phase in degrees.
+
+	"""
 	return scope_driver.getMeasVal(MEAS_SLOT_PHASE)
-	
+
+
 def getFreq():
+	"""Reads frequency measurement result.
+
+	Returns:
+		float: frequency
+	
+	"""
 	return scope_driver.getMeasVal(MEAS_SLOT_FREQ)
 
+
 def getVampl():
+	"""Reads RMS voltage measurement result.
+
+	Returns:
+		float: RMS voltage
+
+	"""
 	return float(scope_driver.getMeasVal(MEAS_SLOT_VAMP))
+
+
+
+
+

@@ -1,7 +1,5 @@
-#/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-"""ED2050 main script.
+"""@package ED2050
+ED2050 main script.
 
 Program terminates by pressing the ESCAPE-Key.
 """
@@ -362,4 +360,5 @@ def checkExcSwitch():
 
 #main func MUST be called AFTER all function definitions
 #this is a workaround, so the main code is at the beginning of the file
-main()
+if __name__ == '__main__':
+    main()

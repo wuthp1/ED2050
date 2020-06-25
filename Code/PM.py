@@ -1,7 +1,5 @@
-#/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-"""Provides API to communicate with powermeter PM3250.
+"""@package PM
+Provides API to communicate with powermeter PM3250.
 
 This package is used to set up the connection to Schneider Electric
 PM3250 and to read the most important register values

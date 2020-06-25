@@ -1,0 +1,75 @@
+\hypertarget{classAdafruit__I2C_1_1Adafruit__I2C}{}\section{Adafruit\+\_\+\+I2\+C.\+Adafruit\+\_\+\+I2C Class Reference}
+\label{classAdafruit__I2C_1_1Adafruit__I2C}\index{Adafruit\+\_\+\+I2\+C.\+Adafruit\+\_\+\+I2C@{Adafruit\+\_\+\+I2\+C.\+Adafruit\+\_\+\+I2C}}
+
+
+Inheritance diagram for Adafruit\+\_\+\+I2\+C.\+Adafruit\+\_\+\+I2C\+:
+% FIG 0
+
+
+Collaboration diagram for Adafruit\+\_\+\+I2\+C.\+Adafruit\+\_\+\+I2C\+:
+% FIG 1
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classAdafruit__I2C_1_1Adafruit__I2C_a275526b9f885629979585735af9b80fb}\label{classAdafruit__I2C_1_1Adafruit__I2C_a275526b9f885629979585735af9b80fb}} 
+def {\bfseries \+\_\+\+\_\+init\+\_\+\+\_\+} (self, address, busnum=-\/1, debug=False)
+\item 
+\mbox{\Hypertarget{classAdafruit__I2C_1_1Adafruit__I2C_a5304256e4c97db1a5c63511a3ffbce79}\label{classAdafruit__I2C_1_1Adafruit__I2C_a5304256e4c97db1a5c63511a3ffbce79}} 
+def {\bfseries reverse\+Byte\+Order} (self, data)
+\item 
+\mbox{\Hypertarget{classAdafruit__I2C_1_1Adafruit__I2C_a70ad4d6f0bcd7202d5d6037d07bd63c1}\label{classAdafruit__I2C_1_1Adafruit__I2C_a70ad4d6f0bcd7202d5d6037d07bd63c1}} 
+def {\bfseries err\+Msg} (self)
+\item 
+\mbox{\Hypertarget{classAdafruit__I2C_1_1Adafruit__I2C_ac512ec585668aa903ebb2c83ec5a9063}\label{classAdafruit__I2C_1_1Adafruit__I2C_ac512ec585668aa903ebb2c83ec5a9063}} 
+def {\bfseries write8} (self, reg, value)
+\item 
+\mbox{\Hypertarget{classAdafruit__I2C_1_1Adafruit__I2C_ac7981b9a34f92003a4d62bfc2623f2c8}\label{classAdafruit__I2C_1_1Adafruit__I2C_ac7981b9a34f92003a4d62bfc2623f2c8}} 
+def {\bfseries write16} (self, reg, value)
+\item 
+\mbox{\Hypertarget{classAdafruit__I2C_1_1Adafruit__I2C_a82244bf9dc063327edf0396cd16d3b27}\label{classAdafruit__I2C_1_1Adafruit__I2C_a82244bf9dc063327edf0396cd16d3b27}} 
+def {\bfseries write\+Raw8} (self, value)
+\item 
+\mbox{\Hypertarget{classAdafruit__I2C_1_1Adafruit__I2C_ad12366ad46139259015def9973fcfab6}\label{classAdafruit__I2C_1_1Adafruit__I2C_ad12366ad46139259015def9973fcfab6}} 
+def {\bfseries write\+List} (self, reg, list)
+\item 
+\mbox{\Hypertarget{classAdafruit__I2C_1_1Adafruit__I2C_a2eedf0933954b397fa3008ed90194744}\label{classAdafruit__I2C_1_1Adafruit__I2C_a2eedf0933954b397fa3008ed90194744}} 
+def {\bfseries read\+List} (self, reg, length)
+\item 
+\mbox{\Hypertarget{classAdafruit__I2C_1_1Adafruit__I2C_aff7d2a517afcd1997b5400dfb345f975}\label{classAdafruit__I2C_1_1Adafruit__I2C_aff7d2a517afcd1997b5400dfb345f975}} 
+def {\bfseries read\+U8} (self, reg)
+\item 
+\mbox{\Hypertarget{classAdafruit__I2C_1_1Adafruit__I2C_a9b4e765565315cc9c933299d26561774}\label{classAdafruit__I2C_1_1Adafruit__I2C_a9b4e765565315cc9c933299d26561774}} 
+def {\bfseries read\+S8} (self, reg)
+\item 
+\mbox{\Hypertarget{classAdafruit__I2C_1_1Adafruit__I2C_a26789ed6393a8f7f4c774a24dd75229c}\label{classAdafruit__I2C_1_1Adafruit__I2C_a26789ed6393a8f7f4c774a24dd75229c}} 
+def {\bfseries read\+U16} (self, reg, little\+\_\+endian=True)
+\item 
+\mbox{\Hypertarget{classAdafruit__I2C_1_1Adafruit__I2C_a3634651db5a3eb539334a44fb245b661}\label{classAdafruit__I2C_1_1Adafruit__I2C_a3634651db5a3eb539334a44fb245b661}} 
+def {\bfseries read\+S16} (self, reg, little\+\_\+endian=True)
+\end{DoxyCompactItemize}
+\subsection*{Static Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classAdafruit__I2C_1_1Adafruit__I2C_a610030cf00e328d4c6c40aaf09d6a995}\label{classAdafruit__I2C_1_1Adafruit__I2C_a610030cf00e328d4c6c40aaf09d6a995}} 
+def {\bfseries get\+Pi\+Revision} ()
+\item 
+\mbox{\Hypertarget{classAdafruit__I2C_1_1Adafruit__I2C_a0146c4f0fd443e58d306e3b727918ab5}\label{classAdafruit__I2C_1_1Adafruit__I2C_a0146c4f0fd443e58d306e3b727918ab5}} 
+def {\bfseries get\+Pi\+I2\+C\+Bus\+Number} ()
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classAdafruit__I2C_1_1Adafruit__I2C_a5c47cfeaca204cf60abee079ca25721b}\label{classAdafruit__I2C_1_1Adafruit__I2C_a5c47cfeaca204cf60abee079ca25721b}} 
+{\bfseries address}
+\item 
+\mbox{\Hypertarget{classAdafruit__I2C_1_1Adafruit__I2C_ae1b334f766a67d913883485d87fdeaa6}\label{classAdafruit__I2C_1_1Adafruit__I2C_ae1b334f766a67d913883485d87fdeaa6}} 
+{\bfseries bus}
+\item 
+\mbox{\Hypertarget{classAdafruit__I2C_1_1Adafruit__I2C_a974302111163c00a14300a2c795d85d5}\label{classAdafruit__I2C_1_1Adafruit__I2C_a974302111163c00a14300a2c795d85d5}} 
+{\bfseries debug}
+\end{DoxyCompactItemize}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Adafruit\+\_\+\+I2\+C.\+py\end{DoxyCompactItemize}

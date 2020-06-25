@@ -1,7 +1,5 @@
-#/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-"""Provides functions to visualize state of the power plant model.
+"""@package draw
+Provides functions to visualize state of the power plant model.
 
 """
 import pygame

@@ -1,0 +1,7 @@
+digraph "Graphical Class Hierarchy"
+{
+  edge [fontname="Helvetica",fontsize="10",labelfontname="Helvetica",labelfontsize="10"];
+  node [fontname="Helvetica",fontsize="10",shape=record];
+  rankdir="LR";
+  Node0 [label="Adafruit_ADS1x15.ADS1x15",height=0.2,width=0.4,color="black", fillcolor="white", style="filled",URL="$classAdafruit__ADS1x15_1_1ADS1x15.html"];
+}

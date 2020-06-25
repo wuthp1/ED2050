@@ -1,7 +1,5 @@
-#/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-"""provides API to communicate with scope Tektronix DPO 2024B
+"""@package scope
+provides API to communicate with scope Tektronix DPO 2024B
 
 This library is proprietary for the ED2050 project and doesn't cover 
 the full functional range of the scope.

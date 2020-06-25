@@ -1,0 +1,50 @@
+\hypertarget{namespacePM}{}\section{PM Namespace Reference}
+\label{namespacePM}\index{PM@{PM}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespacePM_a0f8321915d0cf1c22153f484bd184f36}{init} (port=\textquotesingle{}/dev/serial0\textquotesingle{}, addr=1, baudrate=38400)
+\item 
+def \hyperlink{namespacePM_a825d69d2e8f75daae4ef6359f77b7197}{read\+Reg} (reg\+Name)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{namespacePM_aa4797618f22072d546804bfa5ef809c2}\label{namespacePM_aa4797618f22072d546804bfa5ef809c2}} 
+int {\bfseries O\+F\+F\+S\+ET} = -\/1
+\item 
+\mbox{\Hypertarget{namespacePM_a2f79a32d24ad04a37fce8c70301dc8fd}\label{namespacePM_a2f79a32d24ad04a37fce8c70301dc8fd}} 
+dictionary {\bfseries regs}
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyVerb}@package PM
+Provides API to communicate with powermeter PM3250.
+
+This package is used to set up the connection to Schneider Electric
+PM3250 and to read the most important register values
+\end{DoxyVerb}
+ 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespacePM_a0f8321915d0cf1c22153f484bd184f36}\label{namespacePM_a0f8321915d0cf1c22153f484bd184f36}} 
+\index{PM@{PM}!init@{init}}
+\index{init@{init}!PM@{PM}}
+\subsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily def P\+M.\+init (\begin{DoxyParamCaption}\item[{}]{port = {\ttfamily \textquotesingle{}/dev/serial0\textquotesingle{}},  }\item[{}]{addr = {\ttfamily 1},  }\item[{}]{baudrate = {\ttfamily 38400} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Initializes Serial port for MODBUS connection with power meter.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacePM_a825d69d2e8f75daae4ef6359f77b7197}\label{namespacePM_a825d69d2e8f75daae4ef6359f77b7197}} 
+\index{PM@{PM}!read\+Reg@{read\+Reg}}
+\index{read\+Reg@{read\+Reg}!PM@{PM}}
+\subsubsection{\texorpdfstring{read\+Reg()}{readReg()}}
+{\footnotesize\ttfamily def P\+M.\+read\+Reg (\begin{DoxyParamCaption}\item[{}]{reg\+Name }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Reads register of powermeter.
+
+Returns:
+    float: value of read register, if read was succesfull: 0 otherwise
+\end{DoxyVerb}
+ 

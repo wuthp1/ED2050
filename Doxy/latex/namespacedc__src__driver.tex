@@ -1,0 +1,89 @@
+\hypertarget{namespacedc__src__driver}{}\section{dc\+\_\+src\+\_\+driver Namespace Reference}
+\label{namespacedc__src__driver}\index{dc\+\_\+src\+\_\+driver@{dc\+\_\+src\+\_\+driver}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespacedc__src__driver_a11161defaf468cbc5cb08e4d8c69a7bf}{init} ()
+\item 
+def \hyperlink{namespacedc__src__driver_a0d85b957d8219825193bc4f07a21ac0e}{de\+Init} ()
+\item 
+def \hyperlink{namespacedc__src__driver_a090e51c0489242cad54165afed01b7fb}{set\+Voltage} (volts)
+\item 
+def \hyperlink{namespacedc__src__driver_a46de53ee0b524cebc2ef80d30494490a}{set\+Current} (amps)
+\item 
+def \hyperlink{namespacedc__src__driver_ac2775edfbf5423716a549ffd61dc5c28}{Output\+On} ()
+\item 
+def \hyperlink{namespacedc__src__driver_aba85f65b955b92de14da69217df9dcbf}{Output\+Off} ()
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyVerb}provides API for USB communication with DC source.
+
+This module contains the necessary functions to remotely set Voltage and
+Current of the DC source BK Precision 1687B via USB.
+\end{DoxyVerb}
+ 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespacedc__src__driver_a0d85b957d8219825193bc4f07a21ac0e}\label{namespacedc__src__driver_a0d85b957d8219825193bc4f07a21ac0e}} 
+\index{dc\+\_\+src\+\_\+driver@{dc\+\_\+src\+\_\+driver}!de\+Init@{de\+Init}}
+\index{de\+Init@{de\+Init}!dc\+\_\+src\+\_\+driver@{dc\+\_\+src\+\_\+driver}}
+\subsubsection{\texorpdfstring{de\+Init()}{deInit()}}
+{\footnotesize\ttfamily def dc\+\_\+src\+\_\+driver.\+de\+Init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Closes USB Port to communicate with DC src.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacedc__src__driver_a11161defaf468cbc5cb08e4d8c69a7bf}\label{namespacedc__src__driver_a11161defaf468cbc5cb08e4d8c69a7bf}} 
+\index{dc\+\_\+src\+\_\+driver@{dc\+\_\+src\+\_\+driver}!init@{init}}
+\index{init@{init}!dc\+\_\+src\+\_\+driver@{dc\+\_\+src\+\_\+driver}}
+\subsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily def dc\+\_\+src\+\_\+driver.\+init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Opens USB Port to communicate with DC src.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacedc__src__driver_aba85f65b955b92de14da69217df9dcbf}\label{namespacedc__src__driver_aba85f65b955b92de14da69217df9dcbf}} 
+\index{dc\+\_\+src\+\_\+driver@{dc\+\_\+src\+\_\+driver}!Output\+Off@{Output\+Off}}
+\index{Output\+Off@{Output\+Off}!dc\+\_\+src\+\_\+driver@{dc\+\_\+src\+\_\+driver}}
+\subsubsection{\texorpdfstring{Output\+Off()}{OutputOff()}}
+{\footnotesize\ttfamily def dc\+\_\+src\+\_\+driver.\+Output\+Off (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Switch output off.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacedc__src__driver_ac2775edfbf5423716a549ffd61dc5c28}\label{namespacedc__src__driver_ac2775edfbf5423716a549ffd61dc5c28}} 
+\index{dc\+\_\+src\+\_\+driver@{dc\+\_\+src\+\_\+driver}!Output\+On@{Output\+On}}
+\index{Output\+On@{Output\+On}!dc\+\_\+src\+\_\+driver@{dc\+\_\+src\+\_\+driver}}
+\subsubsection{\texorpdfstring{Output\+On()}{OutputOn()}}
+{\footnotesize\ttfamily def dc\+\_\+src\+\_\+driver.\+Output\+On (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Switch output on.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacedc__src__driver_a46de53ee0b524cebc2ef80d30494490a}\label{namespacedc__src__driver_a46de53ee0b524cebc2ef80d30494490a}} 
+\index{dc\+\_\+src\+\_\+driver@{dc\+\_\+src\+\_\+driver}!set\+Current@{set\+Current}}
+\index{set\+Current@{set\+Current}!dc\+\_\+src\+\_\+driver@{dc\+\_\+src\+\_\+driver}}
+\subsubsection{\texorpdfstring{set\+Current()}{setCurrent()}}
+{\footnotesize\ttfamily def dc\+\_\+src\+\_\+driver.\+set\+Current (\begin{DoxyParamCaption}\item[{}]{amps }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Sets Output Voltage.
+    
+Args:
+    volts (double): Output Voltage in Volts
+    
+Returns:
+    (int): 0
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacedc__src__driver_a090e51c0489242cad54165afed01b7fb}\label{namespacedc__src__driver_a090e51c0489242cad54165afed01b7fb}} 
+\index{dc\+\_\+src\+\_\+driver@{dc\+\_\+src\+\_\+driver}!set\+Voltage@{set\+Voltage}}
+\index{set\+Voltage@{set\+Voltage}!dc\+\_\+src\+\_\+driver@{dc\+\_\+src\+\_\+driver}}
+\subsubsection{\texorpdfstring{set\+Voltage()}{setVoltage()}}
+{\footnotesize\ttfamily def dc\+\_\+src\+\_\+driver.\+set\+Voltage (\begin{DoxyParamCaption}\item[{}]{volts }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Sets Output Voltage.
+    
+Args:
+    volts (double): Output Voltage in Volts
+    
+Returns:
+    (int): 0
+\end{DoxyVerb}
+ 

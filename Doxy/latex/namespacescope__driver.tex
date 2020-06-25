@@ -1,0 +1,537 @@
+\hypertarget{namespacescope__driver}{}\section{scope\+\_\+driver Namespace Reference}
+\label{namespacescope__driver}\index{scope\+\_\+driver@{scope\+\_\+driver}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespacescope__driver_a7dff97e7a734c83b05f8765413706e11}{init} ()
+\item 
+def \hyperlink{namespacescope__driver_a89ba1842eabba389121069eefc856271}{get\+ID} ()
+\item 
+def \hyperlink{namespacescope__driver_aaba7e69130aab5e96c11cce82a4b50a8}{get\+Channel\+Info} (ch\+Nr)
+\item 
+def \hyperlink{namespacescope__driver_abaaffe8208b3e65a883429b67db3efb2}{get\+Channel\+Bandwidth} (ch\+Nr)
+\item 
+def \hyperlink{namespacescope__driver_a372ba6fbecc6901d912839bc234a4150}{set\+Channel\+Bandwidth} (ch\+Nr, bandwidth)
+\item 
+def \hyperlink{namespacescope__driver_a64d5e53c06b715ca0502076d419552e2}{get\+Channel\+Coupling} (ch\+Nr)
+\item 
+def \hyperlink{namespacescope__driver_adf5686f08f00e219e3135dfc617b2af8}{set\+Channel\+Coupling} (ch\+Nr, coupl)
+\item 
+def \hyperlink{namespacescope__driver_a3015b914ca2cd61b10e0ef00267dbb5c}{get\+Channel\+Vert\+Pos} (ch\+Nr)
+\item 
+def \hyperlink{namespacescope__driver_a472b2408b8b9825c9cfbcb8438817306}{set\+Channel\+Vert\+Pos} (ch\+Nr, div)
+\item 
+def \hyperlink{namespacescope__driver_adbdbb48ea81dbe1c65192cf395408853}{get\+Channel\+Vert\+Scale} (ch\+Nr)
+\item 
+def \hyperlink{namespacescope__driver_a92103c5941e85daf979f2902c78999da}{set\+Channel\+Vert\+Scale} (ch\+Nr, scale)
+\item 
+def \hyperlink{namespacescope__driver_aca0699f139892ac173d2ce51bdacfaae}{get\+Hor\+Scale} ()
+\item 
+def \hyperlink{namespacescope__driver_a91febfe7ca6663a9ddb2c384f995582d}{set\+Hor\+Scale} (scale)
+\item 
+def \hyperlink{namespacescope__driver_a3ae93dd45c46cedd0e4cfca50ac4702a}{set\+Meas\+Src1} (src, slot)
+\item 
+def \hyperlink{namespacescope__driver_a9557d4a2261f49f29f07641edb45ef44}{set\+Meas\+Src2} (src, slot)
+\item 
+def \hyperlink{namespacescope__driver_afc9829fe08a35516938ebfff24f1d5f6}{set\+Meas\+Type} (meas\+Type, slot)
+\item 
+def \hyperlink{namespacescope__driver_a9fbe51f28cec4dc18f063dc1a3bd6fad}{set\+Meas\+State} (state, slot)
+\item 
+def \hyperlink{namespacescope__driver_a81c43fce6dc0c7f7c942d8173181797a}{get\+Meas\+Val} (slot)
+\item 
+def \hyperlink{namespacescope__driver_ae2893de33abe9e87c6dcd578ce086ab3}{set\+Imm\+Meas\+Src1} (src)
+\item 
+def \hyperlink{namespacescope__driver_a0a2ecb52f63eb59614b12be61ff7b664}{set\+Imm\+Meas\+Src2} (src)
+\item 
+def \hyperlink{namespacescope__driver_ae38317e7891b58c37b45b1fd30840a50}{set\+Imm\+Meas\+Type} (meas\+Type)
+\item 
+def \hyperlink{namespacescope__driver_a3e836e0e5650976223df934af2662899}{get\+Imm\+Meas\+Val} ()
+\item 
+def \hyperlink{namespacescope__driver_af3354c905fc3521f2346d95214163f8c}{lock\+Front\+Panel} ()
+\item 
+def \hyperlink{namespacescope__driver_ab4b00f96eda8159476a551ec43ff95df}{unlock\+Front\+Panel} ()
+\item 
+def \hyperlink{namespacescope__driver_a2799aba24b2205b99289f820ef95f42e}{select\+Channel} (ch\+Nr, state)
+\item 
+def \hyperlink{namespacescope__driver_a59b84d3870dd3beb19f089d52755b041}{set\+Edge\+Trigger} (source, coupl=\textquotesingle{}H\+FR\textquotesingle{}, slope=\textquotesingle{}R\+IS\textquotesingle{})
+\item 
+def \hyperlink{namespacescope__driver_a712e9258ee9749ff8974dcd7792b9a1e}{set\+Probe\+Gain} (ch\+Nr, gain)
+\item 
+def \hyperlink{namespacescope__driver_a2c16a205b8401242d27d1a6862fc12b5}{turn\+On\+Ch\+Disp} (ch\+Nr)
+\item 
+def \hyperlink{namespacescope__driver_a22cace12fd50d4a60c6e653cd777c55c}{turn\+Off\+Ch\+Disp} (ch\+Nr)
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyVerb}provides API for USB communication with scope.
+\end{DoxyVerb}
+ 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespacescope__driver_abaaffe8208b3e65a883429b67db3efb2}\label{namespacescope__driver_abaaffe8208b3e65a883429b67db3efb2}} 
+\index{scope\+\_\+driver@{scope\+\_\+driver}!get\+Channel\+Bandwidth@{get\+Channel\+Bandwidth}}
+\index{get\+Channel\+Bandwidth@{get\+Channel\+Bandwidth}!scope\+\_\+driver@{scope\+\_\+driver}}
+\subsubsection{\texorpdfstring{get\+Channel\+Bandwidth()}{getChannelBandwidth()}}
+{\footnotesize\ttfamily def scope\+\_\+driver.\+get\+Channel\+Bandwidth (\begin{DoxyParamCaption}\item[{}]{ch\+Nr }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Reads scope channel bandwidth setting.
+
+Args:
+    chNr (int): channel number, may be a integer from 1 to 4
+    
+Returns:
+    str: bandwith setting received from scope\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescope__driver_a64d5e53c06b715ca0502076d419552e2}\label{namespacescope__driver_a64d5e53c06b715ca0502076d419552e2}} 
+\index{scope\+\_\+driver@{scope\+\_\+driver}!get\+Channel\+Coupling@{get\+Channel\+Coupling}}
+\index{get\+Channel\+Coupling@{get\+Channel\+Coupling}!scope\+\_\+driver@{scope\+\_\+driver}}
+\subsubsection{\texorpdfstring{get\+Channel\+Coupling()}{getChannelCoupling()}}
+{\footnotesize\ttfamily def scope\+\_\+driver.\+get\+Channel\+Coupling (\begin{DoxyParamCaption}\item[{}]{ch\+Nr }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Reads scope input attenuator coupling.
+
+Args:
+    chNr (int): channel number, may be a integer from 1 to 4
+
+Returns:
+    str: current scope input attenuator coupling setting
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescope__driver_aaba7e69130aab5e96c11cce82a4b50a8}\label{namespacescope__driver_aaba7e69130aab5e96c11cce82a4b50a8}} 
+\index{scope\+\_\+driver@{scope\+\_\+driver}!get\+Channel\+Info@{get\+Channel\+Info}}
+\index{get\+Channel\+Info@{get\+Channel\+Info}!scope\+\_\+driver@{scope\+\_\+driver}}
+\subsubsection{\texorpdfstring{get\+Channel\+Info()}{getChannelInfo()}}
+{\footnotesize\ttfamily def scope\+\_\+driver.\+get\+Channel\+Info (\begin{DoxyParamCaption}\item[{}]{ch\+Nr }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Reads scope channel info.
+
+Args:
+    chNr (int): channel number, may be a integer from 1 to 4
+    
+Returns:
+    str: channel info received from scope\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescope__driver_a3015b914ca2cd61b10e0ef00267dbb5c}\label{namespacescope__driver_a3015b914ca2cd61b10e0ef00267dbb5c}} 
+\index{scope\+\_\+driver@{scope\+\_\+driver}!get\+Channel\+Vert\+Pos@{get\+Channel\+Vert\+Pos}}
+\index{get\+Channel\+Vert\+Pos@{get\+Channel\+Vert\+Pos}!scope\+\_\+driver@{scope\+\_\+driver}}
+\subsubsection{\texorpdfstring{get\+Channel\+Vert\+Pos()}{getChannelVertPos()}}
+{\footnotesize\ttfamily def scope\+\_\+driver.\+get\+Channel\+Vert\+Pos (\begin{DoxyParamCaption}\item[{}]{ch\+Nr }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Reads vertical position of channel in divisions.
+
+Args:
+    chNr (int): channel number, may be a integer from 1 to 4
+
+Returns:
+    (str): vertical position of channel in divisions
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescope__driver_adbdbb48ea81dbe1c65192cf395408853}\label{namespacescope__driver_adbdbb48ea81dbe1c65192cf395408853}} 
+\index{scope\+\_\+driver@{scope\+\_\+driver}!get\+Channel\+Vert\+Scale@{get\+Channel\+Vert\+Scale}}
+\index{get\+Channel\+Vert\+Scale@{get\+Channel\+Vert\+Scale}!scope\+\_\+driver@{scope\+\_\+driver}}
+\subsubsection{\texorpdfstring{get\+Channel\+Vert\+Scale()}{getChannelVertScale()}}
+{\footnotesize\ttfamily def scope\+\_\+driver.\+get\+Channel\+Vert\+Scale (\begin{DoxyParamCaption}\item[{}]{ch\+Nr }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Reads vertical scale of channel in volts/div.
+
+Args:
+    chNr (int): channel number, may be a integer from 1 to 4
+    
+Returns:
+    (str): vertical scale of channel in volts/div.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescope__driver_aca0699f139892ac173d2ce51bdacfaae}\label{namespacescope__driver_aca0699f139892ac173d2ce51bdacfaae}} 
+\index{scope\+\_\+driver@{scope\+\_\+driver}!get\+Hor\+Scale@{get\+Hor\+Scale}}
+\index{get\+Hor\+Scale@{get\+Hor\+Scale}!scope\+\_\+driver@{scope\+\_\+driver}}
+\subsubsection{\texorpdfstring{get\+Hor\+Scale()}{getHorScale()}}
+{\footnotesize\ttfamily def scope\+\_\+driver.\+get\+Hor\+Scale (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Reads scope time base horizontal scale.
+
+Returns:
+    (str): scope time base horizontal scale in s/div
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescope__driver_a89ba1842eabba389121069eefc856271}\label{namespacescope__driver_a89ba1842eabba389121069eefc856271}} 
+\index{scope\+\_\+driver@{scope\+\_\+driver}!get\+ID@{get\+ID}}
+\index{get\+ID@{get\+ID}!scope\+\_\+driver@{scope\+\_\+driver}}
+\subsubsection{\texorpdfstring{get\+I\+D()}{getID()}}
+{\footnotesize\ttfamily def scope\+\_\+driver.\+get\+ID (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Reads id from scope.
+
+Returns:
+    str: identification string received from scope\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescope__driver_a3e836e0e5650976223df934af2662899}\label{namespacescope__driver_a3e836e0e5650976223df934af2662899}} 
+\index{scope\+\_\+driver@{scope\+\_\+driver}!get\+Imm\+Meas\+Val@{get\+Imm\+Meas\+Val}}
+\index{get\+Imm\+Meas\+Val@{get\+Imm\+Meas\+Val}!scope\+\_\+driver@{scope\+\_\+driver}}
+\subsubsection{\texorpdfstring{get\+Imm\+Meas\+Val()}{getImmMeasVal()}}
+{\footnotesize\ttfamily def scope\+\_\+driver.\+get\+Imm\+Meas\+Val (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Reads measured immediate value.
+    
+Returns:
+    (str): Measured value
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescope__driver_a81c43fce6dc0c7f7c942d8173181797a}\label{namespacescope__driver_a81c43fce6dc0c7f7c942d8173181797a}} 
+\index{scope\+\_\+driver@{scope\+\_\+driver}!get\+Meas\+Val@{get\+Meas\+Val}}
+\index{get\+Meas\+Val@{get\+Meas\+Val}!scope\+\_\+driver@{scope\+\_\+driver}}
+\subsubsection{\texorpdfstring{get\+Meas\+Val()}{getMeasVal()}}
+{\footnotesize\ttfamily def scope\+\_\+driver.\+get\+Meas\+Val (\begin{DoxyParamCaption}\item[{}]{slot }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Reads measured value of specified slot.
+
+Args:
+    slot (int): Measurement slot, may be an integer in 1 to 4
+
+Returns:
+    (str): Measured value
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescope__driver_a7dff97e7a734c83b05f8765413706e11}\label{namespacescope__driver_a7dff97e7a734c83b05f8765413706e11}} 
+\index{scope\+\_\+driver@{scope\+\_\+driver}!init@{init}}
+\index{init@{init}!scope\+\_\+driver@{scope\+\_\+driver}}
+\subsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily def scope\+\_\+driver.\+init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Establishes USB connection with scope.
+
+Uses PyVisa to establish connection to scope.
+The handle to access the scope is saved in the global variable "scope"
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescope__driver_af3354c905fc3521f2346d95214163f8c}\label{namespacescope__driver_af3354c905fc3521f2346d95214163f8c}} 
+\index{scope\+\_\+driver@{scope\+\_\+driver}!lock\+Front\+Panel@{lock\+Front\+Panel}}
+\index{lock\+Front\+Panel@{lock\+Front\+Panel}!scope\+\_\+driver@{scope\+\_\+driver}}
+\subsubsection{\texorpdfstring{lock\+Front\+Panel()}{lockFrontPanel()}}
+{\footnotesize\ttfamily def scope\+\_\+driver.\+lock\+Front\+Panel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Locks all buttons and knobs on the front panel of the scope.
+
+Returns:
+    (bool): True
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescope__driver_a2799aba24b2205b99289f820ef95f42e}\label{namespacescope__driver_a2799aba24b2205b99289f820ef95f42e}} 
+\index{scope\+\_\+driver@{scope\+\_\+driver}!select\+Channel@{select\+Channel}}
+\index{select\+Channel@{select\+Channel}!scope\+\_\+driver@{scope\+\_\+driver}}
+\subsubsection{\texorpdfstring{select\+Channel()}{selectChannel()}}
+{\footnotesize\ttfamily def scope\+\_\+driver.\+select\+Channel (\begin{DoxyParamCaption}\item[{}]{ch\+Nr,  }\item[{}]{state }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Turns display of specified channel on or off
+
+Args:
+    chNr (int): channel number, may be a integer from 1 to 4
+    
+    state (str): channel state; may be 'ON' or 'OFF'.
+        Alternatively '0' can be used instead of 'OFF'. Any other
+        values will set the state to 'ON'
+
+Returns:
+    (bool): True
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescope__driver_a372ba6fbecc6901d912839bc234a4150}\label{namespacescope__driver_a372ba6fbecc6901d912839bc234a4150}} 
+\index{scope\+\_\+driver@{scope\+\_\+driver}!set\+Channel\+Bandwidth@{set\+Channel\+Bandwidth}}
+\index{set\+Channel\+Bandwidth@{set\+Channel\+Bandwidth}!scope\+\_\+driver@{scope\+\_\+driver}}
+\subsubsection{\texorpdfstring{set\+Channel\+Bandwidth()}{setChannelBandwidth()}}
+{\footnotesize\ttfamily def scope\+\_\+driver.\+set\+Channel\+Bandwidth (\begin{DoxyParamCaption}\item[{}]{ch\+Nr,  }\item[{}]{bandwidth }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Sets scope channel bandwidth.
+
+Args:
+    chNr (int): channel number, may be a integer from 1 to 4
+    bandwith: channel bandwidth setting
+        May be 'TWE' for 20Mhz, 'FUL' for full bandwith or a
+        double-precision ASCII string. In this case, the scope
+        rounds the value to an available bandwdith
+    
+Returns:
+    bool: True\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescope__driver_adf5686f08f00e219e3135dfc617b2af8}\label{namespacescope__driver_adf5686f08f00e219e3135dfc617b2af8}} 
+\index{scope\+\_\+driver@{scope\+\_\+driver}!set\+Channel\+Coupling@{set\+Channel\+Coupling}}
+\index{set\+Channel\+Coupling@{set\+Channel\+Coupling}!scope\+\_\+driver@{scope\+\_\+driver}}
+\subsubsection{\texorpdfstring{set\+Channel\+Coupling()}{setChannelCoupling()}}
+{\footnotesize\ttfamily def scope\+\_\+driver.\+set\+Channel\+Coupling (\begin{DoxyParamCaption}\item[{}]{ch\+Nr,  }\item[{}]{coupl }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Sets scope input attenuator coupling.
+
+Args:
+    chNr (int): channel number, may be a integer from 1 to 4
+    coupling (str): Input attenuator setting.
+        May be:
+        'AC' for AC coupling
+        'DC' for DC coubling
+        'GND'. This sets channel to ground-level. Only a flat
+        waveform will be displayed
+
+Returns:
+    bool: True
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescope__driver_a472b2408b8b9825c9cfbcb8438817306}\label{namespacescope__driver_a472b2408b8b9825c9cfbcb8438817306}} 
+\index{scope\+\_\+driver@{scope\+\_\+driver}!set\+Channel\+Vert\+Pos@{set\+Channel\+Vert\+Pos}}
+\index{set\+Channel\+Vert\+Pos@{set\+Channel\+Vert\+Pos}!scope\+\_\+driver@{scope\+\_\+driver}}
+\subsubsection{\texorpdfstring{set\+Channel\+Vert\+Pos()}{setChannelVertPos()}}
+{\footnotesize\ttfamily def scope\+\_\+driver.\+set\+Channel\+Vert\+Pos (\begin{DoxyParamCaption}\item[{}]{ch\+Nr,  }\item[{}]{div }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Sets vertical position of channel in divisions.
+
+Args:
+    chNr (int): channel number, may be a integer from 1 to 4
+    div (float): horizontal position in divisions
+        May be a value between -4 and 4, where 4 is the upper border
+        of the screen and -4 the lower one
+
+Returns:
+    (bool): True
+    
+Example:
+    The following line sets the vertical position of channel 2
+    3.2 divisons over the center:
+        setChannelVertPos(2, 3.2)
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescope__driver_a92103c5941e85daf979f2902c78999da}\label{namespacescope__driver_a92103c5941e85daf979f2902c78999da}} 
+\index{scope\+\_\+driver@{scope\+\_\+driver}!set\+Channel\+Vert\+Scale@{set\+Channel\+Vert\+Scale}}
+\index{set\+Channel\+Vert\+Scale@{set\+Channel\+Vert\+Scale}!scope\+\_\+driver@{scope\+\_\+driver}}
+\subsubsection{\texorpdfstring{set\+Channel\+Vert\+Scale()}{setChannelVertScale()}}
+{\footnotesize\ttfamily def scope\+\_\+driver.\+set\+Channel\+Vert\+Scale (\begin{DoxyParamCaption}\item[{}]{ch\+Nr,  }\item[{}]{scale }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Set vertical scale of channel in volts/div.
+
+Args:
+    chNr (int): channel number, may be a integer from 1 to 4
+    scale (str): vertical scale in volts/div 
+        (e.g. '1.2' or '5.5E-3')
+    
+Returns:
+    (bool): True
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescope__driver_a59b84d3870dd3beb19f089d52755b041}\label{namespacescope__driver_a59b84d3870dd3beb19f089d52755b041}} 
+\index{scope\+\_\+driver@{scope\+\_\+driver}!set\+Edge\+Trigger@{set\+Edge\+Trigger}}
+\index{set\+Edge\+Trigger@{set\+Edge\+Trigger}!scope\+\_\+driver@{scope\+\_\+driver}}
+\subsubsection{\texorpdfstring{set\+Edge\+Trigger()}{setEdgeTrigger()}}
+{\footnotesize\ttfamily def scope\+\_\+driver.\+set\+Edge\+Trigger (\begin{DoxyParamCaption}\item[{}]{source,  }\item[{}]{coupl = {\ttfamily \textquotesingle{}HFR\textquotesingle{}},  }\item[{}]{slope = {\ttfamily \textquotesingle{}RIS\textquotesingle{}} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Sets up edge trigger.
+
+Args:
+    source (str): May be 'CH<x>', D'<y>','EXT','LINE' or 'AUX'
+        where x and y may be an integer in 1 to 4 or 0 to 15,
+        respectively
+    
+    coupl (str): Edge trigger coupling.
+        May be 'DC' for DC coupling,
+        'HFR' for HF rejection (attenuates signals with f > 50kHz)
+        'LFR' for LF rejection (attenuates signals with f < 50kHz)
+        or 'NOISE' for noise rejection, which provides stable
+        triggering by increasing trigger hysteresis. This may
+        require greater trigger signal amplitude
+        
+Returns:
+    (bool): True
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescope__driver_a91febfe7ca6663a9ddb2c384f995582d}\label{namespacescope__driver_a91febfe7ca6663a9ddb2c384f995582d}} 
+\index{scope\+\_\+driver@{scope\+\_\+driver}!set\+Hor\+Scale@{set\+Hor\+Scale}}
+\index{set\+Hor\+Scale@{set\+Hor\+Scale}!scope\+\_\+driver@{scope\+\_\+driver}}
+\subsubsection{\texorpdfstring{set\+Hor\+Scale()}{setHorScale()}}
+{\footnotesize\ttfamily def scope\+\_\+driver.\+set\+Hor\+Scale (\begin{DoxyParamCaption}\item[{}]{scale }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Sets scope time base horizontal scale.
+
+Args:
+    scale (str): time base horizontal scale in s/div
+        e.g. '2E-6' for 2us per division
+
+Returns:
+    (str): scope time base horizontal scale in s/div
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescope__driver_ae2893de33abe9e87c6dcd578ce086ab3}\label{namespacescope__driver_ae2893de33abe9e87c6dcd578ce086ab3}} 
+\index{scope\+\_\+driver@{scope\+\_\+driver}!set\+Imm\+Meas\+Src1@{set\+Imm\+Meas\+Src1}}
+\index{set\+Imm\+Meas\+Src1@{set\+Imm\+Meas\+Src1}!scope\+\_\+driver@{scope\+\_\+driver}}
+\subsubsection{\texorpdfstring{set\+Imm\+Meas\+Src1()}{setImmMeasSrc1()}}
+{\footnotesize\ttfamily def scope\+\_\+driver.\+set\+Imm\+Meas\+Src1 (\begin{DoxyParamCaption}\item[{}]{src }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Sets immediate measurement source 1.
+
+Sets measurement source for all single source measuremets and
+specifies the source to measure "from" for phase and delay
+measurements. The immediate measurement is only available
+on remote control and cannot be displayed on the scope.
+
+Args:
+    src (str): Measurement source
+        May be 'CHx', 'REFx' where x is the (reference) channel
+        number or 'MATH1' for math waveform.
+
+Returns:
+    (bool): True
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescope__driver_a0a2ecb52f63eb59614b12be61ff7b664}\label{namespacescope__driver_a0a2ecb52f63eb59614b12be61ff7b664}} 
+\index{scope\+\_\+driver@{scope\+\_\+driver}!set\+Imm\+Meas\+Src2@{set\+Imm\+Meas\+Src2}}
+\index{set\+Imm\+Meas\+Src2@{set\+Imm\+Meas\+Src2}!scope\+\_\+driver@{scope\+\_\+driver}}
+\subsubsection{\texorpdfstring{set\+Imm\+Meas\+Src2()}{setImmMeasSrc2()}}
+{\footnotesize\ttfamily def scope\+\_\+driver.\+set\+Imm\+Meas\+Src2 (\begin{DoxyParamCaption}\item[{}]{src }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Sets immediate measurement source 2.
+
+Specifies the source to measure "to" for phase and delay
+measurements. The immediate measurement is only available
+on remote control and cannot be displayed on the scope.
+
+Args:
+    src (str): Measurement source
+        May be 'CHx', 'REFx' where x is the (reference) channel
+        number or 'MATH1' for math waveform.
+
+Returns:
+    (bool): True
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescope__driver_ae38317e7891b58c37b45b1fd30840a50}\label{namespacescope__driver_ae38317e7891b58c37b45b1fd30840a50}} 
+\index{scope\+\_\+driver@{scope\+\_\+driver}!set\+Imm\+Meas\+Type@{set\+Imm\+Meas\+Type}}
+\index{set\+Imm\+Meas\+Type@{set\+Imm\+Meas\+Type}!scope\+\_\+driver@{scope\+\_\+driver}}
+\subsubsection{\texorpdfstring{set\+Imm\+Meas\+Type()}{setImmMeasType()}}
+{\footnotesize\ttfamily def scope\+\_\+driver.\+set\+Imm\+Meas\+Type (\begin{DoxyParamCaption}\item[{}]{meas\+Type }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Sets what should be measured.
+
+Args:
+    MeasType (str): Specifies what should be measured
+    Only the most important types are listed here. For more
+    possibilities see Textronix DPO 2000 Programmer Manual
+        'AMP':  Amplitude
+        'FREQ': Frequency
+        'PHA': Phase in degrees
+        'RMS': RMS Voltage
+Returns:
+    (bool): True
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescope__driver_a3ae93dd45c46cedd0e4cfca50ac4702a}\label{namespacescope__driver_a3ae93dd45c46cedd0e4cfca50ac4702a}} 
+\index{scope\+\_\+driver@{scope\+\_\+driver}!set\+Meas\+Src1@{set\+Meas\+Src1}}
+\index{set\+Meas\+Src1@{set\+Meas\+Src1}!scope\+\_\+driver@{scope\+\_\+driver}}
+\subsubsection{\texorpdfstring{set\+Meas\+Src1()}{setMeasSrc1()}}
+{\footnotesize\ttfamily def scope\+\_\+driver.\+set\+Meas\+Src1 (\begin{DoxyParamCaption}\item[{}]{src,  }\item[{}]{slot }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Sets measurement source 1.
+
+Sets measurement source for all single source measuremets and
+specifies the source to measure "from" for phase and delay
+measurements.
+
+Args:
+    src (str): Measurement source
+        May be 'CHx', 'REFx' where x is the (reference) channel
+        number or 'MATH1' for math waveform.
+    
+    slot (int): Measurement slot, may be an integer in 1 to 4\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescope__driver_a9557d4a2261f49f29f07641edb45ef44}\label{namespacescope__driver_a9557d4a2261f49f29f07641edb45ef44}} 
+\index{scope\+\_\+driver@{scope\+\_\+driver}!set\+Meas\+Src2@{set\+Meas\+Src2}}
+\index{set\+Meas\+Src2@{set\+Meas\+Src2}!scope\+\_\+driver@{scope\+\_\+driver}}
+\subsubsection{\texorpdfstring{set\+Meas\+Src2()}{setMeasSrc2()}}
+{\footnotesize\ttfamily def scope\+\_\+driver.\+set\+Meas\+Src2 (\begin{DoxyParamCaption}\item[{}]{src,  }\item[{}]{slot }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Sets measurement source 2.
+
+Specifies the source to measure "to" for phase and delay
+measurements.
+
+Args:
+    src (str): Measurement source
+        May be 'CHx', 'REFx' where x is the (reference) channel
+        number or 'MATH1' for math waveform.
+    
+    slot (int): Measurement slot, may be an integer in 1 to 4\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescope__driver_a9fbe51f28cec4dc18f063dc1a3bd6fad}\label{namespacescope__driver_a9fbe51f28cec4dc18f063dc1a3bd6fad}} 
+\index{scope\+\_\+driver@{scope\+\_\+driver}!set\+Meas\+State@{set\+Meas\+State}}
+\index{set\+Meas\+State@{set\+Meas\+State}!scope\+\_\+driver@{scope\+\_\+driver}}
+\subsubsection{\texorpdfstring{set\+Meas\+State()}{setMeasState()}}
+{\footnotesize\ttfamily def scope\+\_\+driver.\+set\+Meas\+State (\begin{DoxyParamCaption}\item[{}]{state,  }\item[{}]{slot }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Starts/stops measurements of specified slot.
+
+Starts/stops calculation and display of the specified measurement
+slot. Measurement sourc(es) and type must be defined befor measuring
+can be started.
+
+Args:
+    state (str): measurement state; may be 'ON' or 'OFF'.
+        Alternatively '0' can be used instead of 'OFF'. Any other
+        values will set the state to 'ON'
+    
+    slot (int): Measurement slot, may be an integer in 1 to 4
+
+Returns:
+    (bool): True
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescope__driver_afc9829fe08a35516938ebfff24f1d5f6}\label{namespacescope__driver_afc9829fe08a35516938ebfff24f1d5f6}} 
+\index{scope\+\_\+driver@{scope\+\_\+driver}!set\+Meas\+Type@{set\+Meas\+Type}}
+\index{set\+Meas\+Type@{set\+Meas\+Type}!scope\+\_\+driver@{scope\+\_\+driver}}
+\subsubsection{\texorpdfstring{set\+Meas\+Type()}{setMeasType()}}
+{\footnotesize\ttfamily def scope\+\_\+driver.\+set\+Meas\+Type (\begin{DoxyParamCaption}\item[{}]{meas\+Type,  }\item[{}]{slot }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Sets what should be measured.
+
+Args:
+    MeasType (str): Specifies what should be measured
+    Only the most important types are listed here. For more
+    possibilities see Textronix DPO 2000 Programmer Manual
+        'AMP':  Amplitude
+        'FREQ': Frequency
+        'PHA': Phase in degrees
+        'RMS': RMS Voltage
+    
+    slot (int): Measurement slot, may be an integer in 1 to 4
+    
+Returns:
+    (bool): True\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescope__driver_a712e9258ee9749ff8974dcd7792b9a1e}\label{namespacescope__driver_a712e9258ee9749ff8974dcd7792b9a1e}} 
+\index{scope\+\_\+driver@{scope\+\_\+driver}!set\+Probe\+Gain@{set\+Probe\+Gain}}
+\index{set\+Probe\+Gain@{set\+Probe\+Gain}!scope\+\_\+driver@{scope\+\_\+driver}}
+\subsubsection{\texorpdfstring{set\+Probe\+Gain()}{setProbeGain()}}
+{\footnotesize\ttfamily def scope\+\_\+driver.\+set\+Probe\+Gain (\begin{DoxyParamCaption}\item[{}]{ch\+Nr,  }\item[{}]{gain }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Sets ups probe gain.
+
+Gain is the inverse of the probe attenuation, so for a probe with
+10x attenuation the gain must be set to '0.1' which is equivalent 
+to '100E-3' or '1E-1'  
+
+Args:
+    chNr (int): channel number, may be a integer from 1 to 4
+    
+    gain (str): probe gain (inverse of probe attenuation factor)
+
+Returns:
+    (bool): True
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescope__driver_a22cace12fd50d4a60c6e653cd777c55c}\label{namespacescope__driver_a22cace12fd50d4a60c6e653cd777c55c}} 
+\index{scope\+\_\+driver@{scope\+\_\+driver}!turn\+Off\+Ch\+Disp@{turn\+Off\+Ch\+Disp}}
+\index{turn\+Off\+Ch\+Disp@{turn\+Off\+Ch\+Disp}!scope\+\_\+driver@{scope\+\_\+driver}}
+\subsubsection{\texorpdfstring{turn\+Off\+Ch\+Disp()}{turnOffChDisp()}}
+{\footnotesize\ttfamily def scope\+\_\+driver.\+turn\+Off\+Ch\+Disp (\begin{DoxyParamCaption}\item[{}]{ch\+Nr }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Turns display of selected channel off.
+
+Args:
+    chNr (int): channel number, may be a integer from 1 to 4
+
+Returns:
+    (bool): True
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescope__driver_a2c16a205b8401242d27d1a6862fc12b5}\label{namespacescope__driver_a2c16a205b8401242d27d1a6862fc12b5}} 
+\index{scope\+\_\+driver@{scope\+\_\+driver}!turn\+On\+Ch\+Disp@{turn\+On\+Ch\+Disp}}
+\index{turn\+On\+Ch\+Disp@{turn\+On\+Ch\+Disp}!scope\+\_\+driver@{scope\+\_\+driver}}
+\subsubsection{\texorpdfstring{turn\+On\+Ch\+Disp()}{turnOnChDisp()}}
+{\footnotesize\ttfamily def scope\+\_\+driver.\+turn\+On\+Ch\+Disp (\begin{DoxyParamCaption}\item[{}]{ch\+Nr }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Turns display of selected channel on.
+
+Args:
+    chNr (int): channel number, may be a integer from 1 to 4
+
+Returns:
+    (bool): True
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacescope__driver_ab4b00f96eda8159476a551ec43ff95df}\label{namespacescope__driver_ab4b00f96eda8159476a551ec43ff95df}} 
+\index{scope\+\_\+driver@{scope\+\_\+driver}!unlock\+Front\+Panel@{unlock\+Front\+Panel}}
+\index{unlock\+Front\+Panel@{unlock\+Front\+Panel}!scope\+\_\+driver@{scope\+\_\+driver}}
+\subsubsection{\texorpdfstring{unlock\+Front\+Panel()}{unlockFrontPanel()}}
+{\footnotesize\ttfamily def scope\+\_\+driver.\+unlock\+Front\+Panel (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Unlocks all buttons and knobs on the front panel of the scope.
+
+Returns:
+    (bool): True
+\end{DoxyVerb}
+ 

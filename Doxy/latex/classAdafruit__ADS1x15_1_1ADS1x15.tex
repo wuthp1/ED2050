@@ -1,0 +1,133 @@
+\hypertarget{classAdafruit__ADS1x15_1_1ADS1x15}{}\section{Adafruit\+\_\+\+A\+D\+S1x15.\+A\+D\+S1x15 Class Reference}
+\label{classAdafruit__ADS1x15_1_1ADS1x15}\index{Adafruit\+\_\+\+A\+D\+S1x15.\+A\+D\+S1x15@{Adafruit\+\_\+\+A\+D\+S1x15.\+A\+D\+S1x15}}
+\subsection*{Public Member Functions}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classAdafruit__ADS1x15_1_1ADS1x15_ab6d9568209c4374dc24c383349b66e68}\label{classAdafruit__ADS1x15_1_1ADS1x15_ab6d9568209c4374dc24c383349b66e68}} 
+def {\bfseries \+\_\+\+\_\+init\+\_\+\+\_\+} (self, address=0x48, ic=\+\_\+\+\_\+\+I\+C\+\_\+\+A\+D\+S1015, debug=\+False)
+\item 
+\mbox{\Hypertarget{classAdafruit__ADS1x15_1_1ADS1x15_ac1c098e7f21a694b3c35b0db5238281e}\label{classAdafruit__ADS1x15_1_1ADS1x15_ac1c098e7f21a694b3c35b0db5238281e}} 
+def {\bfseries read\+A\+D\+C\+Single\+Ended} (self, channel=0, pga=6144, sps=250)
+\item 
+\mbox{\Hypertarget{classAdafruit__ADS1x15_1_1ADS1x15_afd9615f62d7941fe1b0247da8cbf9e77}\label{classAdafruit__ADS1x15_1_1ADS1x15_afd9615f62d7941fe1b0247da8cbf9e77}} 
+def {\bfseries read\+A\+D\+C\+Differential} (self, chP=0, chN=1, pga=6144, sps=250)
+\item 
+\mbox{\Hypertarget{classAdafruit__ADS1x15_1_1ADS1x15_ae2c037d4206153fe8efeaa345b8ad2fc}\label{classAdafruit__ADS1x15_1_1ADS1x15_ae2c037d4206153fe8efeaa345b8ad2fc}} 
+def {\bfseries read\+A\+D\+C\+Differential01} (self, pga=6144, sps=250)
+\item 
+\mbox{\Hypertarget{classAdafruit__ADS1x15_1_1ADS1x15_a185a5cd2c428e1a5c51281e9b611b4f6}\label{classAdafruit__ADS1x15_1_1ADS1x15_a185a5cd2c428e1a5c51281e9b611b4f6}} 
+def {\bfseries read\+A\+D\+C\+Differential03} (self, pga=6144, sps=250)
+\item 
+\mbox{\Hypertarget{classAdafruit__ADS1x15_1_1ADS1x15_a4045db9ebefb8410245a6b21989ce625}\label{classAdafruit__ADS1x15_1_1ADS1x15_a4045db9ebefb8410245a6b21989ce625}} 
+def {\bfseries read\+A\+D\+C\+Differential13} (self, pga=6144, sps=250)
+\item 
+\mbox{\Hypertarget{classAdafruit__ADS1x15_1_1ADS1x15_a990d6c45116b46442a5360475c0aa3a7}\label{classAdafruit__ADS1x15_1_1ADS1x15_a990d6c45116b46442a5360475c0aa3a7}} 
+def {\bfseries read\+A\+D\+C\+Differential23} (self, pga=6144, sps=250)
+\item 
+\mbox{\Hypertarget{classAdafruit__ADS1x15_1_1ADS1x15_a9514f4d5ef72ee2bb0b8b9be761a863d}\label{classAdafruit__ADS1x15_1_1ADS1x15_a9514f4d5ef72ee2bb0b8b9be761a863d}} 
+def {\bfseries start\+Continuous\+Conversion} (self, channel=0, pga=6144, sps=250)
+\item 
+\mbox{\Hypertarget{classAdafruit__ADS1x15_1_1ADS1x15_a7c0caf702a19de8ff2c0ed231ee68bc4}\label{classAdafruit__ADS1x15_1_1ADS1x15_a7c0caf702a19de8ff2c0ed231ee68bc4}} 
+def {\bfseries start\+Continuous\+Differential\+Conversion} (self, chP=0, chN=1, pga=6144, sps=250)
+\item 
+\mbox{\Hypertarget{classAdafruit__ADS1x15_1_1ADS1x15_a68fcd9270c13a589ce82786452fb6a25}\label{classAdafruit__ADS1x15_1_1ADS1x15_a68fcd9270c13a589ce82786452fb6a25}} 
+def {\bfseries stop\+Continuous\+Conversion} (self)
+\item 
+\mbox{\Hypertarget{classAdafruit__ADS1x15_1_1ADS1x15_a8be2b5fb5dfe16a03642caa1626702a1}\label{classAdafruit__ADS1x15_1_1ADS1x15_a8be2b5fb5dfe16a03642caa1626702a1}} 
+def {\bfseries get\+Last\+Conversion\+Results} (self)
+\item 
+\mbox{\Hypertarget{classAdafruit__ADS1x15_1_1ADS1x15_a2098e937cb97e9694d530f6782c91b5b}\label{classAdafruit__ADS1x15_1_1ADS1x15_a2098e937cb97e9694d530f6782c91b5b}} 
+def {\bfseries start\+Single\+Ended\+Comparator} (self, channel, threshold\+High, threshold\+Low, pga=6144, sps=250, active\+Low=True, traditional\+Mode=True, latching=False, num\+Readings=1)
+\item 
+\mbox{\Hypertarget{classAdafruit__ADS1x15_1_1ADS1x15_a9f5fb0203e2d06e14202544c8041d3fd}\label{classAdafruit__ADS1x15_1_1ADS1x15_a9f5fb0203e2d06e14202544c8041d3fd}} 
+def {\bfseries start\+Differential\+Comparator} (self, chP, chN, threshold\+High, threshold\+Low, pga=6144, sps=250, active\+Low=True, traditional\+Mode=True, latching=False, num\+Readings=1)
+\end{DoxyCompactItemize}
+\subsection*{Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classAdafruit__ADS1x15_1_1ADS1x15_a39852454ef6e288ffa745a1f614db6c7}\label{classAdafruit__ADS1x15_1_1ADS1x15_a39852454ef6e288ffa745a1f614db6c7}} 
+{\bfseries address}
+\item 
+\mbox{\Hypertarget{classAdafruit__ADS1x15_1_1ADS1x15_ad67b1af2c30d8e5ce9c8358ea442dc4e}\label{classAdafruit__ADS1x15_1_1ADS1x15_ad67b1af2c30d8e5ce9c8358ea442dc4e}} 
+{\bfseries debug}
+\item 
+\mbox{\Hypertarget{classAdafruit__ADS1x15_1_1ADS1x15_a6c63a9d31177d7d7cbdb37ac073be6bb}\label{classAdafruit__ADS1x15_1_1ADS1x15_a6c63a9d31177d7d7cbdb37ac073be6bb}} 
+{\bfseries ic}
+\item 
+\mbox{\Hypertarget{classAdafruit__ADS1x15_1_1ADS1x15_a4f813ece115869b0618512b018df6972}\label{classAdafruit__ADS1x15_1_1ADS1x15_a4f813ece115869b0618512b018df6972}} 
+{\bfseries pga}
+\end{DoxyCompactItemize}
+\subsection*{Static Public Attributes}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{classAdafruit__ADS1x15_1_1ADS1x15_a23b4600d8f5ae51f8b2b0bdab1228ccb}\label{classAdafruit__ADS1x15_1_1ADS1x15_a23b4600d8f5ae51f8b2b0bdab1228ccb}} 
+{\bfseries i2c} = None
+\item 
+dictionary {\bfseries sps\+A\+D\+S1115}
+\item 
+dictionary {\bfseries sps\+A\+D\+S1015}
+\item 
+dictionary {\bfseries pga\+A\+D\+S1x15}
+\end{DoxyCompactItemize}
+
+
+\subsection{Member Data Documentation}
+\mbox{\Hypertarget{classAdafruit__ADS1x15_1_1ADS1x15_a271bf7a5172593a708f66d317447fde8}\label{classAdafruit__ADS1x15_1_1ADS1x15_a271bf7a5172593a708f66d317447fde8}} 
+\index{Adafruit\+\_\+\+A\+D\+S1x15\+::\+A\+D\+S1x15@{Adafruit\+\_\+\+A\+D\+S1x15\+::\+A\+D\+S1x15}!pga\+A\+D\+S1x15@{pga\+A\+D\+S1x15}}
+\index{pga\+A\+D\+S1x15@{pga\+A\+D\+S1x15}!Adafruit\+\_\+\+A\+D\+S1x15\+::\+A\+D\+S1x15@{Adafruit\+\_\+\+A\+D\+S1x15\+::\+A\+D\+S1x15}}
+\subsubsection{\texorpdfstring{pga\+A\+D\+S1x15}{pgaADS1x15}}
+{\footnotesize\ttfamily dictionary Adafruit\+\_\+\+A\+D\+S1x15.\+A\+D\+S1x15.\+pga\+A\+D\+S1x15\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=  \{
+    6144:\_\_ADS1015\_REG\_CONFIG\_PGA\_6\_144V,
+    4096:\_\_ADS1015\_REG\_CONFIG\_PGA\_4\_096V,
+    2048:\_\_ADS1015\_REG\_CONFIG\_PGA\_2\_048V,
+    1024:\_\_ADS1015\_REG\_CONFIG\_PGA\_1\_024V,
+    512:\_\_ADS1015\_REG\_CONFIG\_PGA\_0\_512V,
+    256:\_\_ADS1015\_REG\_CONFIG\_PGA\_0\_256V
+  \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classAdafruit__ADS1x15_1_1ADS1x15_a289f25e9d180292cca4c9f9330e6a9a4}\label{classAdafruit__ADS1x15_1_1ADS1x15_a289f25e9d180292cca4c9f9330e6a9a4}} 
+\index{Adafruit\+\_\+\+A\+D\+S1x15\+::\+A\+D\+S1x15@{Adafruit\+\_\+\+A\+D\+S1x15\+::\+A\+D\+S1x15}!sps\+A\+D\+S1015@{sps\+A\+D\+S1015}}
+\index{sps\+A\+D\+S1015@{sps\+A\+D\+S1015}!Adafruit\+\_\+\+A\+D\+S1x15\+::\+A\+D\+S1x15@{Adafruit\+\_\+\+A\+D\+S1x15\+::\+A\+D\+S1x15}}
+\subsubsection{\texorpdfstring{sps\+A\+D\+S1015}{spsADS1015}}
+{\footnotesize\ttfamily dictionary Adafruit\+\_\+\+A\+D\+S1x15.\+A\+D\+S1x15.\+sps\+A\+D\+S1015\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=  \{
+    128:\_\_ADS1015\_REG\_CONFIG\_DR\_128SPS,
+    250:\_\_ADS1015\_REG\_CONFIG\_DR\_250SPS,
+    490:\_\_ADS1015\_REG\_CONFIG\_DR\_490SPS,
+    920:\_\_ADS1015\_REG\_CONFIG\_DR\_920SPS,
+    1600:\_\_ADS1015\_REG\_CONFIG\_DR\_1600SPS,
+    2400:\_\_ADS1015\_REG\_CONFIG\_DR\_2400SPS,
+    3300:\_\_ADS1015\_REG\_CONFIG\_DR\_3300SPS
+  \}
+\end{DoxyCode}
+\mbox{\Hypertarget{classAdafruit__ADS1x15_1_1ADS1x15_a81cf4149d432e3ff6dee510a91ee7996}\label{classAdafruit__ADS1x15_1_1ADS1x15_a81cf4149d432e3ff6dee510a91ee7996}} 
+\index{Adafruit\+\_\+\+A\+D\+S1x15\+::\+A\+D\+S1x15@{Adafruit\+\_\+\+A\+D\+S1x15\+::\+A\+D\+S1x15}!sps\+A\+D\+S1115@{sps\+A\+D\+S1115}}
+\index{sps\+A\+D\+S1115@{sps\+A\+D\+S1115}!Adafruit\+\_\+\+A\+D\+S1x15\+::\+A\+D\+S1x15@{Adafruit\+\_\+\+A\+D\+S1x15\+::\+A\+D\+S1x15}}
+\subsubsection{\texorpdfstring{sps\+A\+D\+S1115}{spsADS1115}}
+{\footnotesize\ttfamily dictionary Adafruit\+\_\+\+A\+D\+S1x15.\+A\+D\+S1x15.\+sps\+A\+D\+S1115\hspace{0.3cm}{\ttfamily [static]}}
+
+{\bfseries Initial value\+:}
+\begin{DoxyCode}
+=  \{
+    8:\_\_ADS1115\_REG\_CONFIG\_DR\_8SPS,
+    16:\_\_ADS1115\_REG\_CONFIG\_DR\_16SPS,
+    32:\_\_ADS1115\_REG\_CONFIG\_DR\_32SPS,
+    64:\_\_ADS1115\_REG\_CONFIG\_DR\_64SPS,
+    128:\_\_ADS1115\_REG\_CONFIG\_DR\_128SPS,
+    250:\_\_ADS1115\_REG\_CONFIG\_DR\_250SPS,
+    475:\_\_ADS1115\_REG\_CONFIG\_DR\_475SPS,
+    860:\_\_ADS1115\_REG\_CONFIG\_DR\_860SPS
+  \}
+\end{DoxyCode}
+
+
+The documentation for this class was generated from the following file\+:\begin{DoxyCompactItemize}
+\item 
+Adafruit\+\_\+\+A\+D\+S1x15.\+py\end{DoxyCompactItemize}

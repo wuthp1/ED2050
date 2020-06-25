@@ -1,7 +1,3 @@
-#/usr/bin/env python
-# -*- coding: utf-8 -*-
-
-
 """library to set and read out the needed GPIOs of the Raspberry Pi for the ED2050.
 
 This library provides functions to set the state of the used Relays of

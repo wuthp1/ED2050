@@ -1,0 +1,142 @@
+\hypertarget{namespacedraw}{}\section{draw Namespace Reference}
+\label{namespacedraw}\index{draw@{draw}}
+\subsection*{Functions}
+\begin{DoxyCompactItemize}
+\item 
+def \hyperlink{namespacedraw_a8faeca448048936cb5bc781a47a0198a}{init} ()
+\item 
+def \hyperlink{namespacedraw_a92f4b47f502e75c973b88f1b2b8cc3fd}{write} (msg, font=\char`\"{}Courier New\char`\"{}, size=40)
+\item 
+def \hyperlink{namespacedraw_a43ef9e3a9bbc75b8eedb246bb405a440}{op\+\_\+chart} (screen, p, q)
+\item 
+def \hyperlink{namespacedraw_afd81ee7eb842130bdb8f43065d2df27a}{arrow} (surf, color, start, end, arr\+\_\+size=10, arr\+\_\+angle=(pi/6))
+\item 
+def \hyperlink{namespacedraw_a277cf79dca33663a9bcc173931660ac9}{op\+\_\+arrows} (surf, p, q, center, gd)
+\item 
+def \hyperlink{namespacedraw_af5dc748bd3063bc390fded916ae2a6d2}{op\+\_\+arc} (surf, screen\+\_\+width, center)
+\end{DoxyCompactItemize}
+\subsection*{Variables}
+\begin{DoxyCompactItemize}
+\item 
+\mbox{\Hypertarget{namespacedraw_a073753510e230b144b29e6bca4d6d10a}\label{namespacedraw_a073753510e230b144b29e6bca4d6d10a}} 
+tuple {\bfseries B\+L\+A\+CK} = ( 0, 0, 0)
+\item 
+\mbox{\Hypertarget{namespacedraw_aef39b17a80c4d914408e430aa74d815e}\label{namespacedraw_aef39b17a80c4d914408e430aa74d815e}} 
+tuple {\bfseries W\+H\+I\+TE} = (255, 255, 255)
+\item 
+\mbox{\Hypertarget{namespacedraw_a4dbb48a624bdc33477977841707271e8}\label{namespacedraw_a4dbb48a624bdc33477977841707271e8}} 
+tuple {\bfseries B\+L\+UE} = ( 0, 0, 255)
+\item 
+\mbox{\Hypertarget{namespacedraw_ad5f096bd59eb4bc2aa302076eaae8fcb}\label{namespacedraw_ad5f096bd59eb4bc2aa302076eaae8fcb}} 
+tuple {\bfseries G\+R\+E\+EN} = ( 0, 255, 0)
+\item 
+\mbox{\Hypertarget{namespacedraw_ae7bb3ea9d810a374eb499a62249838c1}\label{namespacedraw_ae7bb3ea9d810a374eb499a62249838c1}} 
+tuple {\bfseries R\+ED} = (255, 0, 0)
+\item 
+\mbox{\Hypertarget{namespacedraw_af502731675c4fe43fb31566ee9f3859b}\label{namespacedraw_af502731675c4fe43fb31566ee9f3859b}} 
+int {\bfseries M\+A\+X\+\_\+\+L\+O\+A\+D\+\_\+\+A\+N\+G\+LE} = 70$\ast$pi/180
+\item 
+\mbox{\Hypertarget{namespacedraw_a3d2bbe965a57a895106c9c09beaf8e70}\label{namespacedraw_a3d2bbe965a57a895106c9c09beaf8e70}} 
+int {\bfseries XD} = 2
+\end{DoxyCompactItemize}
+
+
+\subsection{Detailed Description}
+\begin{DoxyVerb}@package draw
+Provides functions to visualize state of the power plant model.\end{DoxyVerb}
+ 
+
+\subsection{Function Documentation}
+\mbox{\Hypertarget{namespacedraw_afd81ee7eb842130bdb8f43065d2df27a}\label{namespacedraw_afd81ee7eb842130bdb8f43065d2df27a}} 
+\index{draw@{draw}!arrow@{arrow}}
+\index{arrow@{arrow}!draw@{draw}}
+\subsubsection{\texorpdfstring{arrow()}{arrow()}}
+{\footnotesize\ttfamily def draw.\+arrow (\begin{DoxyParamCaption}\item[{}]{surf,  }\item[{}]{color,  }\item[{}]{start,  }\item[{}]{end,  }\item[{}]{arr\+\_\+size = {\ttfamily 10},  }\item[{}]{arr\+\_\+angle = {\ttfamily (pi/6)} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Draws an arrow on a surface.
+
+Draws a single ended arrow. The line consists of single lines, so the
+arrowhead will not be filled.
+
+Args:
+    surf (pygame.Surface): surface to draw arrow onto
+    color (pygame.Color): color of the arrow
+    start (tuple(int or float x, int or float y): start position of
+        arrow in pixels.
+    end (tuple(int or float x, int or float y): end position of
+        arrow in pixels.\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacedraw_a8faeca448048936cb5bc781a47a0198a}\label{namespacedraw_a8faeca448048936cb5bc781a47a0198a}} 
+\index{draw@{draw}!init@{init}}
+\index{init@{init}!draw@{draw}}
+\subsubsection{\texorpdfstring{init()}{init()}}
+{\footnotesize\ttfamily def draw.\+init (\begin{DoxyParamCaption}{ }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Initializes pygame.
+
+pygame is the library which provides functions to do the graphics.
+
+Returns:
+    pygame.Surface: fullscreen surface to draw on.
+\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacedraw_af5dc748bd3063bc390fded916ae2a6d2}\label{namespacedraw_af5dc748bd3063bc390fded916ae2a6d2}} 
+\index{draw@{draw}!op\+\_\+arc@{op\+\_\+arc}}
+\index{op\+\_\+arc@{op\+\_\+arc}!draw@{draw}}
+\subsubsection{\texorpdfstring{op\+\_\+arc()}{op\_arc()}}
+{\footnotesize\ttfamily def draw.\+op\+\_\+arc (\begin{DoxyParamCaption}\item[{}]{surf,  }\item[{}]{screen\+\_\+width,  }\item[{}]{center }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Draws arc of operating chart on surface.
+
+Args:
+    surf (pygame.Surface): surface to draw arrows onto.
+    screen_width (int): width of surf in pixels.
+    center (tuple(int or float x, int or float y): center position of
+        the chart (=start position of arrows) in pixels.
+    gd (float): synchronous admittance (1/xd) of synchronous machine
+        in p.u.\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacedraw_a277cf79dca33663a9bcc173931660ac9}\label{namespacedraw_a277cf79dca33663a9bcc173931660ac9}} 
+\index{draw@{draw}!op\+\_\+arrows@{op\+\_\+arrows}}
+\index{op\+\_\+arrows@{op\+\_\+arrows}!draw@{draw}}
+\subsubsection{\texorpdfstring{op\+\_\+arrows()}{op\_arrows()}}
+{\footnotesize\ttfamily def draw.\+op\+\_\+arrows (\begin{DoxyParamCaption}\item[{}]{surf,  }\item[{}]{p,  }\item[{}]{q,  }\item[{}]{center,  }\item[{}]{gd }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Draws arrows of operating chart on surface.
+
+Args:
+    surf (pygame.Surface): surface to draw arrows onto.
+    p (float): active power of the synchronous machine p.u.
+    q (float): reactive power of the synchronous machine p.u.
+    center (tuple(int or float x, int or float y): center position of
+        the chart (=start position of arrows) in pixels.
+    gd (float): synchronous admittance (1/xd) of synchronous machine
+        in p.u.\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacedraw_a43ef9e3a9bbc75b8eedb246bb405a440}\label{namespacedraw_a43ef9e3a9bbc75b8eedb246bb405a440}} 
+\index{draw@{draw}!op\+\_\+chart@{op\+\_\+chart}}
+\index{op\+\_\+chart@{op\+\_\+chart}!draw@{draw}}
+\subsubsection{\texorpdfstring{op\+\_\+chart()}{op\_chart()}}
+{\footnotesize\ttfamily def draw.\+op\+\_\+chart (\begin{DoxyParamCaption}\item[{}]{screen,  }\item[{}]{p,  }\item[{}]{q }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Draws operating chart of the synchronous machine.
+
+Args:
+    screen (pygame.Surface): Surface to draw chart onto
+    p (float): active power of the synchronous machine p.u.
+    q (float): reactive power of the synchronous machine p.u.
+
+Returns:
+    pygame.Surface: surface with the power chart on it\end{DoxyVerb}
+ \mbox{\Hypertarget{namespacedraw_a92f4b47f502e75c973b88f1b2b8cc3fd}\label{namespacedraw_a92f4b47f502e75c973b88f1b2b8cc3fd}} 
+\index{draw@{draw}!write@{write}}
+\index{write@{write}!draw@{draw}}
+\subsubsection{\texorpdfstring{write()}{write()}}
+{\footnotesize\ttfamily def draw.\+write (\begin{DoxyParamCaption}\item[{}]{msg,  }\item[{}]{font = {\ttfamily \char`\"{}Courier~New\char`\"{}},  }\item[{}]{size = {\ttfamily 40} }\end{DoxyParamCaption})}
+
+\begin{DoxyVerb}Draws a text on a new surface.
+
+Args:
+    msg (str): text to be written.
+    font (str): font to use for the text.
+    size (int): font size in pixels.
+
+Returns:
+    pygame.Surface: surface with text on it.\end{DoxyVerb}
+ 

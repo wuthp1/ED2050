@@ -3,7 +3,7 @@ Provides functions to visualize state of the power plant model.
 
 """
 import pygame
-from math import pi, sin, cos, tan, atan2, pow, sqrt
+from math import pi, sin, cos, tan, atan2, pow, sqrt, acos
 
 # Define the colors use in RGB format
 BLACK = (  0,   0,   0)
@@ -24,7 +24,7 @@ global screen
 """pygame.Surface: screen to draw on"""
 
 #define serial reactance p.u.
-XD = 2
+XD = 3.6
 
 
 
@@ -65,7 +65,7 @@ def op_chart(screen,p,q):
     """Draws operating chart of the synchronous machine.
     
     Args:
-        screen (pygame.Surface): Surface to draw chart onto
+        screen (pygame.Surface): Surface to draw chart onto.
         p (float): active power of the synchronous machine p.u.
         q (float): reactive power of the synchronous machine p.u.
     
@@ -101,6 +101,49 @@ def op_chart(screen,p,q):
     
     #draw the arrows indicating the operating point
     op_arrows(chart,p*scale,q*scale,center,scale/XD)
+    
+    return chart
+
+
+def arr_chart(screen, uk, i, cosphi):
+    """Draws arrow chart of the synchronous machine voltages.
+    
+    Args:
+        screen (pygame.Surface): Surface to draw chart onto.
+    
+    Returns:
+        pygame.Surface: surface with the arrow chart on it.
+    
+        
+    """
+    screensize = screen.get_size()
+    x = int(screensize[0]/2)
+    y = int(screensize[1]/2)
+    
+    phi = acos(cosphi)
+    i_re = i * cos(phi)
+    i_im = i * sin(phi)
+    
+    #if capacitive load (see return values for cosphi in PM3250 Datasheet)
+    if((cosphi < -1) or (cosphi > 1)):
+        i_im = -i_im
+    
+    
+    
+    #create surface for operating chart
+    chart = pygame.Surface((x,y))
+    #create white background for operating chart
+    bg_chart = pygame.Surface(chart.get_size())
+    bg_chart.fill(WHITE)
+    bg_chart=bg_chart.convert()
+    chart.blit(bg_chart,(0,0))
+    
+    #calculate scaling factor pixel/(p.u.)
+    scale = x*0.45
+    #claculate diagram center
+    center = (x/2, y-100)
+    
+    arrow(chart,BLACK, (center), ((center[0]),(center[1]-(uk*scale)) )
     
     return chart
 

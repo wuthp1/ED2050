@@ -200,6 +200,9 @@ def drawData(screen):
     screen.blit(draw.write('frequency:      ' + '%7.2f' %f + ' Hz'),(10,410))
     screen.blit(draw.write('rotor speed:    ' + '%7.2f' %(f*30) + ' rpm'),(10,460))
     
+    screen.blit(draw.write('p'),(1430,460))
+    screen.blit(draw.write('q'),(1890,910))
+    
     if(scopeConnected == False):
         screen.blit(draw.write('CONNECT SCOPE!!!', "FreeMonoBold",100),(10,600))
     
@@ -235,7 +238,7 @@ def checkSync():
     
     if (phase < SYNC_MAX_PHASE_DEV) and (phase > (-SYNC_MAX_PHASE_DEV)) and (volt > NOM_VOLT - SYNC_MAX_VOLT_DEV) and (volt < NOM_VOLT + SYNC_MAX_VOLT_DEV) and (freq > NOM_FREQ - SYNC_MAX_FREQ_DEV) and (freq < NOM_FREQ + SYNC_MAX_FREQ_DEV) and (ratingsExceeded == False):
         gpio.enableSync()
-        time.sleep(0.2)
+        time.sleep(0.3)
     else:
         gpio.disableSync()
 

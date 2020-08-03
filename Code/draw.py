@@ -143,7 +143,15 @@ def arr_chart(screen, uk, i, cosphi):
     #claculate diagram center
     center = (x/2, y-100)
     
-    arrow(chart,BLACK, (center), ((center[0]),(center[1]-(uk*scale)) )
+    uk_start = (int(center[0]),int(center[1]))
+    uk_end = (int(center[0]),int(center[1]-uk*scale))
+    arrow(chart,BLACK, uk_start, uk_end)
+    
+    
+    uxd_re =
+    uxd_im = 
+    uxd_start = uk_end
+    uxd_end = (int(uxd_start[0] -  ), ())
     
     return chart
 

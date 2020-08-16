@@ -125,6 +125,9 @@ def arr_chart(screen, uk, i, cosphi):
     i_im = i * sin(phi)
     
     #if capacitive load (see return values for cosphi in PM3250 Datasheet)
+    if cosphi <-1:
+        #
+    elif cosphi 
     if((cosphi < -1) or (cosphi > 1)):
         i_im = -i_im
     

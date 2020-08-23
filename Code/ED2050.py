@@ -24,10 +24,13 @@ import dc_src_driver
 SYNC_MAX_PHASE_DEV  = 20
 SYNC_MAX_VOLT_DEV   = 15
 SYNC_MAX_FREQ_DEV   = 2
+
+NOMINAL_POWER       = 2000
 NOM_VOLT            = 230
 NOM_FREQ            = 50
+NOM_CURR            = NOMINAL_POWER/(3*NOM_VOLT)
+
 WHITE               = (255, 255, 255)
-NOMINAL_POWER       = 2000
 MAX_FREQ            = 2700/30
 MAX_VOLTAGE         = 300
 MIN_PUMP_OFF_TIME   = 1
@@ -155,7 +158,10 @@ def drawData(screen):
 
     """
     #draw chart in the right half
-    chart = draw.op_chart(screen, P/NOMINAL_POWER, Q/NOMINAL_POWER)
+    if gpio.getSyncState():
+        chart = draw.op_chart(screen, P/NOMINAL_POWER, Q/NOMINAL_POWER)
+    else:
+        chart = draw.arr_chart(screen, UAVG/NOM_VOLT, IAVG/NOM_CURR, PF)
     
     # Copy background to screen (position (0, 0) is upper left corner).
     screen.blit(background, (0,0))
@@ -199,6 +205,7 @@ def drawData(screen):
     
     screen.blit(draw.write('frequency:      ' + '%7.2f' %f + ' Hz'),(10,410))
     screen.blit(draw.write('rotor speed:    ' + '%7.2f' %(f*30) + ' rpm'),(10,460))
+    screen.blit(draw.write('rotor speed:    ' + '%7.2f' %PF),(10,510))
     
     screen.blit(draw.write('p'),(1430,460))
     screen.blit(draw.write('q'),(1890,910))

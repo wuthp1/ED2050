@@ -3,7 +3,7 @@ Provides functions to visualize state of the power plant model.
 
 """
 import pygame
-from math import pi, sin, cos, tan, atan2, pow, sqrt, acos
+from math import pi, sin, cos, tan, atan2, pow, sqrt, acos, isnan
 
 # Define the colors use in RGB format
 BLACK = (  0,   0,   0)
@@ -116,21 +116,37 @@ def arr_chart(screen, uk, i, cosphi):
     
         
     """
+    if isnan(cosphi):
+        cosphi = 0.7
     screensize = screen.get_size()
     x = int(screensize[0]/2)
     y = int(screensize[1]/2)
-    
-    phi = acos(cosphi)
-    i_re = i * cos(phi)
-    i_im = i * sin(phi)
-    
-    #if capacitive load (see return values for cosphi in PM3250 Datasheet)
-    if cosphi <-1:
-        #
-    elif cosphi 
-    if((cosphi < -1) or (cosphi > 1)):
-        i_im = -i_im
-    
+    try:
+        
+        if cosphi <-1:
+            #active power negative, capacitive
+            cosphi = cosphi + 1 
+            phi = acos(cosphi)
+            
+        elif cosphi < 0:
+            #active power negative, inductive
+            cosphi = cosphi
+            phi = acos(cosphi)
+            phi = (pi/2)*(1-phi)
+            
+        elif cosphi < 1:
+            #active power positive, inductive
+            phi = acos(cosphi)
+        else:
+            #active power positive, capacitive
+            cosphi = cosphi -1
+            phi = acos(cosphi)
+            phi = 2*pi-phi
+    except:
+        return pygame.Surface(x,y)
+        
+    i_re = i*cos(phi)
+    i_im = i*sin(phi)
     
     
     #create surface for operating chart
@@ -150,11 +166,20 @@ def arr_chart(screen, uk, i, cosphi):
     uk_end = (int(center[0]),int(center[1]-uk*scale))
     arrow(chart,BLACK, uk_start, uk_end)
     
-    
-    uxd_re =
-    uxd_im = 
+    uxd_re = i*XD*sin(phi+(pi/2))
+    uxd_im = i*XD*cos(phi+(pi/2))
     uxd_start = uk_end
-    uxd_end = (int(uxd_start[0] -  ), ())
+    uxd_end = (int(uxd_start[0] + uxd_im*scale), int(uxd_start[1]- uxd_re*scale))
+    arrow(chart, BLACK, uxd_start, uxd_end)
+    
+    up_start = uk_start
+    up_end = uxd_end
+    arrow(chart, GREEN, up_start, up_end)
+    
+    i_start = up_start
+    i_end = (int(i_start[0] + i_im*scale),int(i_start[0] - i_re*scale))
+    arrow(chart, RED, i_start, i_end)
+    
     
     return chart
 

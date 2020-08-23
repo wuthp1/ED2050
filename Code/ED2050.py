@@ -29,7 +29,7 @@ NOMINAL_POWER       = 2000
 NOM_VOLT            = 230
 NOM_FREQ            = 50
 
-NOM_CURR			= NOMINAL_POWER/(3*NOM_VOLT)
+NOM_CURR            = NOMINAL_POWER/(3*NOM_VOLT)
 
 WHITE               = (255, 255, 255)
 MAX_FREQ            = 2700/30
@@ -98,6 +98,7 @@ def main():
     
     # exit when mainloop has been left
     gpio.lampOff()
+    gpio.pumpOff()
     pygame.quit()
 
 
@@ -156,19 +157,20 @@ def drawData(screen):
     
     Args:
         screen (pygame.Surface): screen object to draw data on it
-
+    
     """
-    #draw chart in the right half
-	try:
-		if gpio.getSyncState():
-	        chart = draw.op_chart(screen, P/NOMINAL_POWER, Q/NOMINAL_POWER)
-	    else:
-	        chart = draw.arr_chart(screen, UAVG/NOM_VOLT,IAVG/NOM_CURR,P/NOMINAL_POWER,Q/NOMINAL_POWER)
-    except:
-        #do nothing
-
     # Copy background to screen (position (0, 0) is upper left corner).
     screen.blit(background, (0,0))
+    #draw chart in the right half
+    if gpio.getSyncState():
+        chart = draw.op_chart(screen, P/NOMINAL_POWER, Q/NOMINAL_POWER)
+        screen.blit(draw.write('p'),(1430,460))
+        screen.blit(draw.write('q'),(1430,910))
+    else:
+        chart = draw.arr_chart(screen, UAVG/NOM_VOLT,IAVG/NOM_CURR,P/NOMINAL_POWER,Q/NOMINAL_POWER)
+    
+    
+    
     screen.blit(chart,(screensize[0]/2,screensize[1]/2))
     x = 10
     screen.blit(draw.write('Total',"FreeMonoBold"),(x,10))
@@ -209,16 +211,16 @@ def drawData(screen):
     
     screen.blit(draw.write('frequency:      ' + '%7.2f' %f + ' Hz'),(10,410))
     screen.blit(draw.write('rotor speed:    ' + '%7.2f' %(f*30) + ' rpm'),(10,460))
-    screen.blit(draw.write('rotor speed:    ' + '%7.2f' %PF),(10,510))
-    
-    screen.blit(draw.write('p'),(1430,460))
-    screen.blit(draw.write('q'),(1890,910))
-    
+        
     if(scopeConnected == False):
         screen.blit(draw.write('CONNECT SCOPE!!!', "FreeMonoBold",100),(10,600))
     
     if(dcSrcConnected == False):
         screen.blit(draw.write('CONNECT DC SOURCE!!!', "FreeMonoBold",100),(10,700))
+    
+    if gpio.getSyncState():
+        screen.blit(draw.write('p'),(1430,460))
+        screen.blit(draw.write('q'),(1890,910))
 
 
 def checkSync():
@@ -275,10 +277,10 @@ def checkEvents():
 
 
 def initScreen():
-    """Initializes a fullscreen surface with white white background.
+    """Initializes a fullscreen surface with white background.
     
     Returns:
-        pygame.Surface: fullscreen surface with white white background
+        pygame.Surface: fullscreen surface with white background
     """
     global background, screensize
     screen = draw.init()

@@ -116,8 +116,6 @@ def arr_chart(screen, uk, i, p, q):
     
         
     """
-    if isnan(cosphi):
-        cosphi = 0.7
     screensize = screen.get_size()
     x = int(screensize[0]/2)
     y = int(screensize[1]/2)
@@ -162,6 +160,16 @@ def arr_chart(screen, uk, i, p, q):
     uxd_end = (int(uxd_start[0] + uxd_hor ), int(uxd_start[1] - uxd_vert))
     arrow(chart, GREEN, uxd_start, uxd_end)
     arrow(chart, BLUE, uk_start, uxd_end)
+    
+    #create legend
+    arrow(chart, BLACK, (x-60,20), (x-20,20))
+    arrow(chart, BLUE, (x-60,50), (x-20,50))
+    arrow(chart, GREEN, (x-60,80), (x-20,80))
+    arrow(chart, RED, (x-60,110), (x-20,110))
+    chart.blit(write('Ugen',size=20),(x-120,10))
+    chart.blit(write('Up',size=20),(x-120,40))
+    chart.blit(write('Uxd',size=20),(x-120,70))
+    chart.blit(write('I',size=20),(x-120,100))
     
     return chart
 

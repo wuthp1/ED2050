@@ -28,12 +28,9 @@ SYNC_MAX_FREQ_DEV   = 2
 NOMINAL_POWER       = 2000
 NOM_VOLT            = 230
 NOM_FREQ            = 50
-<<<<<<< HEAD
-NOM_CURR            = NOMINAL_POWER/(3*NOM_VOLT)
 
-=======
 NOM_CURR			= NOMINAL_POWER/(3*NOM_VOLT)
->>>>>>> f2d691d6bafa6ddcb214eb9bdd850a2100f75800
+
 WHITE               = (255, 255, 255)
 MAX_FREQ            = 2700/30
 MAX_VOLTAGE         = 300

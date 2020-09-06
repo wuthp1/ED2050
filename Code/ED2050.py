@@ -26,6 +26,7 @@ SYNC_MAX_VOLT_DEV   = 15
 SYNC_MAX_FREQ_DEV   = 2
 NOM_VOLT            = 230
 NOM_FREQ            = 50
+NOM_CURR			= NOMINAL_POWER/(3*NOM_VOLT)
 WHITE               = (255, 255, 255)
 NOMINAL_POWER       = 2000
 MAX_FREQ            = 2700/30
@@ -155,8 +156,13 @@ def drawData(screen):
 
     """
     #draw chart in the right half
-    chart = draw.op_chart(screen, P/NOMINAL_POWER, Q/NOMINAL_POWER)
-    
+	try:
+		if gpio.getSyncState():
+	        chart = draw.op_chart(screen, P/NOMINAL_POWER, Q/NOMINAL_POWER)
+	    else:
+	        chart = draw.arr_chart(screen, UAVG/NOM_VOLT,IAVG/NOM_CURR,P/NOMINAL_POWER,Q/NOMINAL_POWER)
+    except:
+        #do nothing
     # Copy background to screen (position (0, 0) is upper left corner).
     screen.blit(background, (0,0))
     screen.blit(chart,(screensize[0]/2,screensize[1]/2))

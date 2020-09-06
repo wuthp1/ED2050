@@ -23,7 +23,7 @@ drawn in the opaerating chart."""
 global screen
 """pygame.Surface: screen to draw on"""
 
-#define serial reactance p.u.
+#define synchronous reactance p.u.
 XD = 3.6
 
 
@@ -105,7 +105,7 @@ def op_chart(screen,p,q):
     return chart
 
 
-def arr_chart(screen, uk, i, cosphi):
+def arr_chart(screen, uk, i, p, q):
     """Draws arrow chart of the synchronous machine voltages.
     
     Args:
@@ -119,17 +119,8 @@ def arr_chart(screen, uk, i, cosphi):
     screensize = screen.get_size()
     x = int(screensize[0]/2)
     y = int(screensize[1]/2)
+    phi = atan2(q,p)
     
-    phi = acos(cosphi)
-    i_re = i * cos(phi)
-    i_im = i * sin(phi)
-    
-    #if capacitive load (see return values for cosphi in PM3250 Datasheet)
-    if cosphi <-1:
-        #
-    elif cosphi 
-    if((cosphi < -1) or (cosphi > 1)):
-        i_im = -i_im
     
     
     
@@ -143,18 +134,29 @@ def arr_chart(screen, uk, i, cosphi):
     
     #calculate scaling factor pixel/(p.u.)
     scale = x*0.45
-    #claculate diagram center
+    #calculate diagram center
     center = (x/2, y-100)
     
+    #calculate generator terminal voltage phasor
     uk_start = (int(center[0]),int(center[1]))
     uk_end = (int(center[0]),int(center[1]-uk*scale))
     arrow(chart,BLACK, uk_start, uk_end)
     
+    #calculate generator current phasor
+    i_hor = i*sin(phi)*scale
+    i_vert = i*cos(phi)*scale
+    i_start = uk_start
+    i_end = (int(i_start[0]+i_hor),int(i_start[1]-i_vert))
+    arrow(chart, RED, i_start, i_end)
     
-    uxd_re =
-    uxd_im = 
+    #calculate voltage across synchronous reactance phasor
+    uxd = i*scale
+    uxd_hor = -cos(phi)*uxd
+    uxd_vert = sin(phi)*uxd
     uxd_start = uk_end
-    uxd_end = (int(uxd_start[0] -  ), ())
+    uxd_end = (int(uxd_start[0] + uxd_hor ), int(uxd_start[1] - uxd_vert))
+    arrow(chart, GREEN, uxd_start, uxd_end)
+    arrow(chart, BLUE, uk_start, uxd_end)
     
     return chart
 
